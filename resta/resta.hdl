@@ -1,0 +1,10 @@
+CHIP resta {
+	IN ah[16],al[16],bh[16],bl[16];
+	OUT sh[16],sl[16];
+	
+	PARTS:
+	ComplementoAUno(num=bh,num2=num2inv);
+	ComplementoAUno(num=bl,num2=num1inv);
+	Add16(a=ah,b=bh,out=sh,carry=carry);
+	Add16(a=al,b=bl,out=sl,carry=carry1);
+}

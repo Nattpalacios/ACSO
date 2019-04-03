@@ -1,0 +1,13 @@
+CHIP complemento {
+	IN ah[16],al[16];
+	OUT sh[16],sl[16];
+	
+	PARTS:	
+	IsNegative(num=al,out=neg);
+	If16(a=ah,b=neg,out=ah1);
+	If16(a=al,b=neg,out=al1);
+	ComplementoAUno(num=ah1,num2=num2inv);
+	ComplementoAUno(num=al1,num2=num1inv);
+	Add16(a=num2inv,b=neg,out=sh,carry=carry);
+	Add16(a=num1inv,b=carry,out=sl,carry=carry1);
+}

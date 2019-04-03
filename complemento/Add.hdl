@@ -1,0 +1,12 @@
+CHIP Add {
+	IN a,b;
+	OUT out,carry;
+	
+	PARTS:
+	Not(in=a,out=not1);
+	Not(in=b,out=not2);
+	And(a=not1,b=b,out=and1);
+	And(a=not2,b=a,out=and2);
+	Or(a=and1,b=and2,out=out);
+	And(a=a,b=b,out=carry);
+}
