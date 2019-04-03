@@ -1,0 +1,10 @@
+CHIP SSEM {
+	IN cih[16],cil[16],
+		ch[16],cl[16],
+		sh[16],sl[16],
+		pi[3];
+	OUT rh[16],rl[16];
+	
+	PARTS:
+	
+}
