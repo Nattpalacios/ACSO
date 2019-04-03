@@ -7,33 +7,33 @@ CHIP Add16 {
 	Add(a=a[1],b=b[1],out=out[1],carry=carry2);
 	Add(a=carry1,b=out[1],out=out[1],carry=carry3);
 	Add(a=a[2],b=b[2],out=out[2],carry=carry4);
-	Add(a=carry3,b=carry4,out=out[2],carry=carry5);
+	Add(a=carry3,b=out[2],out=out[2],carry=carry5);
 	Add(a=a[3],b=b[3],out=out[3],carry=carry6);
-	Add(a=carry5,b=carry6,out=out[3],carry=carry7);
+	Add(a=carry5,b=out[3],out=out[3],carry=carry7);
 	Add(a=a[4],b=b[4],out=out[4],carry=carry8);
-	Add(a=carry7,b=carry8,out=out[4],carry=carry9);
+	Add(a=carry7,b=out[4],out=out[4],carry=carry9);
 	Add(a=a[5],b=b[5],out=out[5],carry=carry10);
-	Add(a=carry9,b=carry10,out=out[5],carry=carry11);
+	Add(a=carry9,b=out[5],out=out[5],carry=carry11);
 	Add(a=a[6],b=b[6],out=out[6],carry=carry12);
-	Add(a=carry11,b=carry12,out=out[6],carry=carry13);
+	Add(a=carry11,b=out[6],out=out[6],carry=carry13);
 	Add(a=a[7],b=b[7],out=out[7],carry=carry14);
-	Add(a=carry13,b=carry14,out=out[7],carry=carry15);
+	Add(a=carry13,b=out[7],out=out[7],carry=carry15);
 	Add(a=a[8],b=b[8],out=out[8],carry=carry16);
-	Add(a=carry15,b=carry16,out=out[8],carry=carry17);
+	Add(a=carry15,b=out[8],out=out[8],carry=carry17);
 	Add(a=a[9],b=b[9],out=out[9],carry=carry18);
-	Add(a=carry17,b=carry18,out=out[9],carry=carry19);
+	Add(a=carry17,b=out[9],out=out[9],carry=carry19);
 	Add(a=a[10],b=b[10],out=out[10],carry=carry20);
-	Add(a=carry19,b=carry20,out=out[10],carry=carry21);
+	Add(a=carry19,b=out[10],out=out[10],carry=carry21);
 	Add(a=a[11],b=b[11],out=out[11],carry=carry22);
-	Add(a=carry21,b=carry22,out=out[11],carry=carry23);
+	Add(a=carry21,b=out[11],out=out[11],carry=carry23);
 	Add(a=a[12],b=b[12],out=out[12],carry=carry24);
-	Add(a=carry23,b=carry24,out=out[12],carry=carry25);
+	Add(a=carry23,b=out[12],out=out[12],carry=carry25);
 	Add(a=a[13],b=b[13],out=out[13],carry=carry26);
-	Add(a=carry25,b=carry26,out=out[13],carry=carry27);
+	Add(a=carry25,b=out[13],out=out[13],carry=carry27);
 	Add(a=a[14],b=b[14],out=out[14],carry=carry28);
-	Add(a=carry27,b=carry28,out=out[14],carry=carry29);
+	Add(a=carry27,b=out[14],out=out[14],carry=carry29);
 	Add(a=a[15],b=b[15],out=out[15],carry=carry30);
-	Add(a=carry29,b=carry30,out=out[15],carry=carry31);
+	Add(a=carry29,b=out[15],out=out[15],carry=carry31);
 }
 
 

@@ -5,6 +5,8 @@ CHIP resta {
 	PARTS:
 	ComplementoAUno(num=bh,num2=num2inv);
 	ComplementoAUno(num=bl,num2=num1inv);
+	Add16(a=num2inv,b=false,out=sh,carry=carry);
+	Add16(a=num1inv,b=carry,out=sl,carry=carry1);
 	Add16(a=ah,b=bh,out=sh,carry=carry);
 	Add16(a=al,b=bl,out=sl,carry=carry1);
 }
