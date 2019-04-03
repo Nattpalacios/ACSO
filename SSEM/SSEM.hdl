@@ -6,5 +6,18 @@ CHIP SSEM {
 	OUT rh[16],rl[16];
 	
 	PARTS:
+	resta(ah=ch,al=cl,bh=sh,bl=sl,sha=r0,sla=r2);
 	
+	ComplementoADos(a=sh,b=sl,out1=sinv1,out2=sinv2);
+	
+	Add16(a=cih,b=sh,out=out1,carry=carry1);
+	AddCom(a=cil,b=carry1,out=cil1,carry=carry2);
+	Add16(a=cil1,b=sl,out=out2,carry=carry3);
+	
+	IsNegative(num=cl,out=neg);
+	AddCom(a=cih,b=neg,out=en1,carry=carry5);
+	AddCom(a=cil,b=carry5,out=en2,carry=carry10);
+	
+	Mux8Way16(a=sh,b=r0,c=sinv1,d=en1,e=out1,f=r0,g=ch,h=ch,sel=pi,out=rh);
+	Mux8Way16(a=sl,b=r2,c=sinv2,d=en2,e=out2,f=r2,g=cl,h=cl,sel=pi,out=rl);
 }
