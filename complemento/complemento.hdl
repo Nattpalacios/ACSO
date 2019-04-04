@@ -8,6 +8,6 @@ CHIP complemento {
 	If16(a=al,b=neg,out=al1);
 	ComplementoAUno(num=ah1,num2=num2inv);
 	ComplementoAUno(num=al1,num2=num1inv);
-	Add16(a=num2inv,b=neg,out=sh,carry=carry);
-	Add16(a=num1inv,b=carry,out=sl,carry=carry1);
+	Add161(a=num2inv,b=neg,out=sh,carry=carry);
+	Add161(a=num1inv,b=carry,out=sl,carry=carry1);
 }

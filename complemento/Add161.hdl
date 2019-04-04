@@ -1,4 +1,4 @@
-CHIP Add16 {
+CHIP Add161 {
 	IN a[16],b;
 	OUT out[16],carry;
 	

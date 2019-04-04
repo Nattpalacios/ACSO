@@ -5,6 +5,6 @@ CHIP ComplementoADos {
 	PARTS:	
 	ComplementoAUno(num=ah,num2=num2inv);
 	ComplementoAUno(num=al,num2=num1inv);
-	Add16(a=num2inv,b=true,out=sh,carry=carry);
-	Add16(a=num1inv,b=carry,out=sl,carry=carry1);
+	Add161(a=num2inv,b=true,out=sh,carry=carry);
+	Add161(a=num1inv,b=carry,out=sl,carry=carry1);
 }
