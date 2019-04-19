@@ -1,0 +1,340 @@
+- Pascal-FC for IBM PC compatibles - 
+- GNU Compiler Version P5.2.1.2
+
+G L Davies  &  A Burns, University of York
+G Ospina, Escuela Colombiana de Ingenieria
+
+Compiler listing
+
+    1     0 program polyPhaseMergeSort;
+    2     0 const
+    3     0    N = 2000;
+    4     0 type
+    5     0    vector = array[0..N] of integer;
+    6     0 var
+    7     0    arreglo:vector;
+    8     0    mostrar:integer;
+    9     0    leer:integer;
+   10     0 
+   11     0 procedure merge(var arreglo:vector;l:integer;m:integer;r:integer);
+   12     0 type
+   13     0    vectorS = array[0..N] of integer;
+   14     0 var   
+   15     0    left, right:vectorS;
+   16     0    i,j,k,n1,n2:integer;
+   17     0 begin 
+   18     0    n1 := m-l;
+   19     5    n2 := r-m;
+   20    10 
+   21    10    for i := 1 to n1 do
+   22    14       left[i] := arreglo[l + i];
+   23    25    for j := 1 to (n2-1) do
+   24    31       right[j] := arreglo[(m + 1) + j];
+   25    44    i := 0;  j := 0;  k := l;
+   26    53    while ((i <= n1) and (j < n2)) do
+   27    61       begin
+   28    61          if left[i] <= right[j] then
+   29    71             begin
+   30    71                arreglo[k] := left[i];
+   31    79                i := i + 1;
+   32    84             end
+   33    84          else if left[i] > right[j] then
+   34    95             begin
+   35    95                arreglo[k] := right[j];
+   36   103                j := j + 1;
+   37   108             end;
+   38   108          k := k + 1;
+   39   113       end;
+   40   114 
+   41   114    while (i <= n1) do
+   42   118       begin
+   43   118          arreglo[k] := left[i];
+   44   126          i := i + 1;
+   45   131          k := k + 1;
+   46   136       end;
+   47   137    while (j < n2) do
+   48   141       begin
+   49   141          arreglo[k] := right[j];
+   50   149          j := j + 1;
+   51   154          k := k + 1;
+   52   159       end;
+   53   160 end;
+   54   161 
+   55   161 procedure polyPhaseMergeSort(var arreglo:vector;l:integer;r:integer);
+   56   161 var
+   57   161    m:integer;
+   58   161 begin
+   59   161    if (l < r) then
+   60   165       begin
+   61   165          m := (l+(r-1)) div 2;
+   62   174          [sic] parallel
+***********          ^ 9 ----------
+   63   174             polyPhaseMergeSort(arreglo,l,m)|
+***********                                            ^27
+   64   174             polyPhaseMergeSort(arreglo,m+1,r);
+   65   174          end;
+   66   174          merge(arreglo,l,m,r);
+   67   181       end;
+   68   182 end;
+***********   ^28 
+   69   182 
+   70   182 begin
+   71   182    for i := 1 to N do
+***********        ^ 0 
+   72   185       readln(arreglo[i]);
+***********                      ^ 0 
+   73   190 
+   74   190    polyPhaseMergeSort(arreglo,1,N);
+   75   195 
+   76   195    for i := 1 to N do
+***********        ^ 0 
+   77   198       writeln(arreglo[i]);
+***********                       ^ 0 
+   78   204 end.
+
+ Error diagnostics
+
+E0 -  undeclared identifier
+E9 -  ';' expected
+E27 -  illegal character
+E28 -  unexpected symbol
+
+
+
+Symbol table
+
+    name       link      objekt       type         ref      nrm  lev  adr  aux
+
+ 45 _main        44     procedure   notyp           2      True    0  182    0
+ 46 any           0     variable    synch           0      True    1    5    0
+ 47 n            46     constant    integer         0     False    1 2000    0
+ 48 vector       47     type id     array           1     False    1 2001    0
+ 49 arreglo      48     variable    array           1      True    1    5    0
+ 50 mostrar      49     variable    integer         0      True    1 2006    0
+ 51 leer         50     variable    integer         0      True    1 2007    0
+ 52 merge        51     procedure   notyp           3      True    1    0    0
+ 53 arreglo       0     variable    array           1     False    2    5    0
+ 54 l            53     variable    integer         0      True    2    6    0
+ 55 m            54     variable    integer         0      True    2    7    0
+ 56 r            55     variable    integer         0      True    2    8    0
+ 57 vectors      56     type id     array           2     False    2 2001    0
+ 58 left         57     variable    array           2      True    2    9    0
+ 59 right        58     variable    array           2      True    2 2010    0
+ 60 i            59     variable    integer         0      True    2 4011    0
+ 61 j            60     variable    integer         0      True    2 4012    0
+ 62 k            61     variable    integer         0      True    2 4013    0
+ 63 n1           62     variable    integer         0      True    2 4014    0
+ 64 n2           63     variable    integer         0      True    2 4015    0
+ 65 polyphasem   52     procedure   notyp           4      True    1  161    0
+ 66 arreglo       0     variable    array           1     False    2    5    0
+ 67 l            66     variable    integer         0      True    2    6    0
+ 68 r            67     variable    integer         0      True    2    7    0
+ 69 m            68     variable    integer         0      True    2    8    0
+
+Generated P-code
+
+    0     ldadr        2      4014          ;17
+    1     ldval.i      2         7          ;18
+    2     ldval.i      2         6          ;18
+    3     subop.i      0         0          ;18
+    4     store.i      0         0          ;18
+    5     ldadr        2      4015          ;18
+    6     ldval.i      2         8          ;19
+    7     ldval.i      2         7          ;19
+    8     subop.i      0         0          ;19
+    9     store.i      0         0          ;19
+   10     ldadr        2      4011          ;19
+   11     ldcon.i      0         1          ;21
+   12     ldval.i      2      4014          ;21
+   13     for1u.i      0        25          ;21
+   14     ldadr        2         9          ;21
+   15     ldval.i      2      4011          ;22
+   16     ixary.i      0         2          ;22
+   17     ldval.adr    2         5          ;22
+   18     ldval.i      2         6          ;22
+   19     ldval.i      2      4011          ;22
+   20     addop.i      0         0          ;22
+   21     ixary.i      0         1          ;22
+   22     rpadr.i      0         0          ;22
+   23     store.i      0         0          ;22
+   24     for2u.i      0        14          ;22
+   25     ldadr        2      4012          ;22
+   26     ldcon.i      0         1          ;23
+   27     ldval.i      2      4015          ;23
+   28     ldcon.i      0         1          ;23
+   29     subop.i      0         0          ;23
+   30     for1u.i      0        44          ;23
+   31     ldadr        2      2010          ;23
+   32     ldval.i      2      4012          ;24
+   33     ixary.i      0         2          ;24
+   34     ldval.adr    2         5          ;24
+   35     ldval.i      2         7          ;24
+   36     ldcon.i      0         1          ;24
+   37     addop.i      0         0          ;24
+   38     ldval.i      2      4012          ;24
+   39     addop.i      0         0          ;24
+   40     ixary.i      0         1          ;24
+   41     rpadr.i      0         0          ;24
+   42     store.i      0         0          ;24
+   43     for2u.i      0        31          ;24
+   44     ldadr        2      4011          ;24
+   45     ldcon.i      0         0          ;25
+   46     store.i      0         0          ;25
+   47     ldadr        2      4012          ;25
+   48     ldcon.i      0         0          ;25
+   49     store.i      0         0          ;25
+   50     ldadr        2      4013          ;25
+   51     ldval.i      2         6          ;25
+   52     store.i      0         0          ;25
+   53     ldval.i      2      4011          ;26
+   54     ldval.i      2      4014          ;26
+   55     relle.i      0         0          ;26
+   56     ldval.i      2      4012          ;26
+   57     ldval.i      2      4015          ;26
+   58     rellt.i      0         0          ;26
+   59     andop.b      0         0          ;26
+   60     jmpiz        0       114          ;26
+   61     ldadr        2         9          ;28
+   62     ldval.i      2      4011          ;28
+   63     ixary.i      0         2          ;28
+   64     rpadr.i      0         0          ;28
+   65     ldadr        2      2010          ;28
+   66     ldval.i      2      4012          ;28
+   67     ixary.i      0         2          ;28
+   68     rpadr.i      0         0          ;28
+   69     relle.i      0         0          ;28
+   70     jmpiz        0        85          ;28
+   71     ldval.adr    2         5          ;29
+   72     ldval.i      2      4013          ;30
+   73     ixary.i      0         1          ;30
+   74     ldadr        2         9          ;30
+   75     ldval.i      2      4011          ;30
+   76     ixary.i      0         2          ;30
+   77     rpadr.i      0         0          ;30
+   78     store.i      0         0          ;30
+   79     ldadr        2      4011          ;30
+   80     ldval.i      2      4011          ;31
+   81     ldcon.i      0         1          ;31
+   82     addop.i      0         0          ;31
+   83     store.i      0         0          ;31
+   84     jmpuc        0       108          ;32
+   85     ldadr        2         9          ;33
+   86     ldval.i      2      4011          ;33
+   87     ixary.i      0         2          ;33
+   88     rpadr.i      0         0          ;33
+   89     ldadr        2      2010          ;33
+   90     ldval.i      2      4012          ;33
+   91     ixary.i      0         2          ;33
+   92     rpadr.i      0         0          ;33
+   93     relgt.i      0         0          ;33
+   94     jmpiz        0       108          ;33
+   95     ldval.adr    2         5          ;34
+   96     ldval.i      2      4013          ;35
+   97     ixary.i      0         1          ;35
+   98     ldadr        2      2010          ;35
+   99     ldval.i      2      4012          ;35
+  100     ixary.i      0         2          ;35
+  101     rpadr.i      0         0          ;35
+  102     store.i      0         0          ;35
+  103     ldadr        2      4012          ;35
+  104     ldval.i      2      4012          ;36
+  105     ldcon.i      0         1          ;36
+  106     addop.i      0         0          ;36
+  107     store.i      0         0          ;36
+  108     ldadr        2      4013          ;37
+  109     ldval.i      2      4013          ;38
+  110     ldcon.i      0         1          ;38
+  111     addop.i      0         0          ;38
+  112     store.i      0         0          ;38
+  113     jmpuc        0        53          ;38
+  114     ldval.i      2      4011          ;41
+  115     ldval.i      2      4014          ;41
+  116     relle.i      0         0          ;41
+  117     jmpiz        0       137          ;41
+  118     ldval.adr    2         5          ;42
+  119     ldval.i      2      4013          ;43
+  120     ixary.i      0         1          ;43
+  121     ldadr        2         9          ;43
+  122     ldval.i      2      4011          ;43
+  123     ixary.i      0         2          ;43
+  124     rpadr.i      0         0          ;43
+  125     store.i      0         0          ;43
+  126     ldadr        2      4011          ;43
+  127     ldval.i      2      4011          ;44
+  128     ldcon.i      0         1          ;44
+  129     addop.i      0         0          ;44
+  130     store.i      0         0          ;44
+  131     ldadr        2      4013          ;44
+  132     ldval.i      2      4013          ;45
+  133     ldcon.i      0         1          ;45
+  134     addop.i      0         0          ;45
+  135     store.i      0         0          ;45
+  136     jmpuc        0       114          ;45
+  137     ldval.i      2      4012          ;47
+  138     ldval.i      2      4015          ;47
+  139     rellt.i      0         0          ;47
+  140     jmpiz        0       160          ;47
+  141     ldval.adr    2         5          ;48
+  142     ldval.i      2      4013          ;49
+  143     ixary.i      0         1          ;49
+  144     ldadr        2      2010          ;49
+  145     ldval.i      2      4012          ;49
+  146     ixary.i      0         2          ;49
+  147     rpadr.i      0         0          ;49
+  148     store.i      0         0          ;49
+  149     ldadr        2      4012          ;49
+  150     ldval.i      2      4012          ;50
+  151     ldcon.i      0         1          ;50
+  152     addop.i      0         0          ;50
+  153     store.i      0         0          ;50
+  154     ldadr        2      4013          ;50
+  155     ldval.i      2      4013          ;51
+  156     ldcon.i      0         1          ;51
+  157     addop.i      0         0          ;51
+  158     store.i      0         0          ;51
+  159     jmpuc        0       137          ;51
+  160     rproc        0         0          ;52
+  161     ldval.i      2         6          ;59
+  162     ldval.i      2         7          ;59
+  163     rellt.i      0         0          ;59
+  164     jmpiz        0       174          ;59
+  165     ldadr        2         8          ;60
+  166     ldval.i      2         6          ;61
+  167     ldval.i      2         7          ;61
+  168     ldcon.i      0         1          ;61
+  169     subop.i      0         0          ;61
+  170     addop.i      0         0          ;61
+  171     ldcon.i      0         2          ;61
+  172     divop.i      0         0          ;61
+  173     store.i      0         0          ;61
+  174     mkstk        0        52          ;65
+  175     ldval.adr    2         5          ;66
+  176     ldval.i      2         6          ;66
+  177     ldval.i      2         8          ;66
+  178     ldval.i      2         7          ;66
+  179     calls        0         8          ;66
+  180     updis        1         2          ;66
+  181     rproc        0         0          ;66
+  182     ldcon.i      0         1          ;71
+  183     ldcon.i      0      2000          ;71
+  184     for1u        0       190          ;71
+  185     ldadr        1         5          ;72
+  186     ldval        0         0          ;72
+  187     rdinp.i      0         0          ;72
+  188     rdlin        0         0          ;72
+  189     for2u        0       185          ;72
+  190     mkstk        0        65          ;72
+  191     ldadr        1         5          ;74
+  192     ldcon.i      0         1          ;74
+  193     ldcon.i      0      2000          ;74
+  194     calls        0         7          ;74
+  195     ldcon.i      0         1          ;76
+  196     ldcon.i      0      2000          ;76
+  197     for1u        0       204          ;76
+  198     ldadr        1         5          ;77
+  199     ldval        0         0          ;77
+  200     rpadr.i      0         0          ;77
+  201     wrval.i      0         0          ;77
+  202     wrlin        0         0          ;77
+  203     for2u        0       198          ;77
+  204     stopx        0         0          ;77

@@ -1,0 +1,280 @@
+Pascal-FC post-mortem report on produconsu
+- Pascal-FC for IBM PC compatibles - 
+- GNU Interpreter Version P5.3.1.2
+
+G L Davies  &  A Burns, University of York
+G Ospina, Escuela Colombiana de Ingenieria
+
+
+Abnormal halt in process consumerar[9] with pc = 44
+Reason:   illegal or uninitialised character
+
+
+----------
+Main program
+
+Status:  awaiting process termination
+
+
+----------
+Process producerar[1]
+
+Status:  terminated
+
+
+----------
+Process consumerar[1]
+
+Status:  active
+pc = 40
+
+
+----------
+Process producerar[2]
+
+Status:  terminated
+
+
+----------
+Process consumerar[2]
+
+Status:  active
+pc = 36
+
+
+----------
+Process producerar[3]
+
+Status:  terminated
+
+
+----------
+Process consumerar[3]
+
+Status:  terminated
+
+
+----------
+Process producerar[4]
+
+Status:  terminated
+
+
+----------
+Process consumerar[4]
+
+Status:  active
+pc = 8
+
+
+----------
+Process producerar[5]
+
+Status:  terminated
+
+
+----------
+Process consumerar[5]
+
+Status:  active
+pc = 9
+
+
+----------
+Process producerar[6]
+
+Status:  terminated
+
+
+----------
+Process consumerar[6]
+
+Status:  active
+pc = 10
+
+
+----------
+Process producerar[7]
+
+Status:  terminated
+
+
+----------
+Process consumerar[7]
+
+Status:  active
+pc = 39
+
+
+----------
+Process producerar[8]
+
+Status:  terminated
+
+
+----------
+Process consumerar[8]
+
+Status:  terminated
+
+
+----------
+Process producerar[9]
+
+Status:  terminated
+
+
+----------
+Process consumerar[9]
+
+Status:  active
+pc = 44
+
+
+----------
+Process producerar[10]
+
+Status:  terminated
+
+
+----------
+Process consumerar[10]
+
+Status:  terminated
+
+
+----------
+Process producerar[11]
+
+Status:  terminated
+
+
+----------
+Process consumerar[11]
+
+Status:  active
+pc = 36
+
+
+----------
+Process producerar[12]
+
+Status:  terminated
+
+
+----------
+Process consumerar[12]
+
+Status:  active
+pc = 8
+
+
+----------
+Process producerar[13]
+
+Status:  terminated
+
+
+----------
+Process consumerar[13]
+
+Status:  active
+pc = 9
+
+
+----------
+Process producerar[14]
+
+Status:  terminated
+
+
+----------
+Process consumerar[14]
+
+Status:  active
+pc = 4
+
+
+----------
+Process producerar[15]
+
+Status:  terminated
+
+
+----------
+Process consumerar[15]
+
+Status:  active
+pc = 7
+
+
+----------
+Process producerar[16]
+
+Status:  terminated
+
+
+----------
+Process consumerar[16]
+
+Status:  active
+pc = 3
+
+
+----------
+Process producerar[17]
+
+Status:  terminated
+
+
+----------
+Process consumerar[17]
+
+Status:  active
+pc = 6
+
+
+----------
+Process producerar[18]
+
+Status:  terminated
+
+
+----------
+Process consumerar[18]
+
+Status:  terminated
+
+
+----------
+Process producerar[19]
+
+Status:  terminated
+
+
+----------
+Process consumerar[19]
+
+Status:  active
+pc = 6
+
+
+----------
+Process producerar[20]
+
+Status:  terminated
+
+
+----------
+Process consumerar[20]
+
+Status:  active
+pc = 41
+
+
+
+==========
+Global variables
+
+n          = 20
+i          = 20

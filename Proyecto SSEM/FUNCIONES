@@ -1,8 +1,0 @@
-*000 - Guardo S en CI y retorno CI / Retornar S                   a   
---001 - A C le resto S                                             b   -----------------------
-*010 - Niego S y lo guardo en C, retorno C / Retornar -S          c   -----------------------
-*011 - A CI sumarle 1 si C es negativo, retorno CI   			  d	 -----------------------
-100 - A CI le sumo S y retorno CI / Retornar la suma de S y CI   e   -----------------------
---101 - A C le resto S                                             f   -----------------------
-*110 - Guardo C en S y retorno S / Retornar C                     g   
-*111 - Retornar C                                                 h   

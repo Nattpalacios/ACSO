@@ -1,6 +1,0 @@
-CHIP IsNegative {
-	IN num[16];
-	OUT out;
-	PARTS:
-	Or(a=num[15], b=false, out=out);
-}

@@ -1,0 +1,58 @@
+program ProductoDeMatrices;
+const
+	maxFilas = 151;
+	maxColumnas = 100;
+type
+	vector = array [1..maxColumnas] of integer;
+	matriz = array [1..maxFilas] of vector;
+var
+	f1,c1,f2,c2,i,j,m:integer;
+	mat1,mat2,matRes:matriz;
+
+process type multiplicacion(var rta: matriz;var a: matriz;var b:matriz;filaIni: integer; filaFin: integer);
+	var
+		i,j,k,cont: integer;
+	begin
+		cont:=0;
+		for k:=filaIni to filaFin do
+			for i:=1 to c2 do
+				begin
+					for j:=1 to c1 do
+						begin
+							cont := cont+(a[k,j]*b[j,i])
+						end;
+					rta[k,i]:=cont;
+					cont := 0;
+				end;
+	end;
+
+var aProcesos : array[1..151] of multiplicacion;
+begin
+	readln(f1);
+	readln(c1);
+	for i:=1 to f1 do
+		for j:=1 to c1 do
+			readln(mat1[i,j]);
+	readln(f2);
+	readln(c2);
+	for i:=1 to f2 do
+		for j:=1 to c2 do
+			readln(mat2[i,j]);
+	m := (f1+1) div 2;
+	cobegin
+		for i:=1 to m do
+			begin
+				aProcesos[i] (matRes,mat1,mat2,((i-1)*(f1 div m))+1, i*(f1 div m))
+			end;
+	coend;
+	for i:=1 to f1 do
+		begin
+			for j:=1 to c2 do
+				begin
+					write(matRes[i,j]);
+					write(' ');
+				end;
+			writeln(' ');
+		end;
+end.
+

@@ -1,0 +1,51 @@
+program ProduConsu;
+const
+	numMax = 100000;
+type
+	Canal=*(char);
+	Buffer = array[1..numMax] of Canal;
+var
+	buf:Buffer;
+	n,i:integer;
+
+function mayusCast(letra:char):char;
+	begin
+		if (97 <= ord(letra)) and (ord(letra) <= 122) then
+			mayusCast:= chr(ord(letra)-32)
+		else 
+			begin
+				mayusCast:=letra;
+			end;	
+	end;
+
+procedure consumer(k:integer);
+	var
+		b:char;
+	begin
+		receive(buf[k],b);
+		b:=mayusCast(b);
+		writeln(b);
+	end;
+
+procedure producer(k:integer);
+	var
+		a:char;
+		i:integer;
+	begin
+		for i:=1 to k do
+			begin
+				readln(a);
+				send(buf[i],a);
+			end;		
+	end;
+
+begin
+	readln(n);
+	for i:=1 to n do
+		open(buf[i]);
+	parallel
+		producer(n)|
+		for i:= 1 to n do
+			consumer(i);
+	end;
+end.

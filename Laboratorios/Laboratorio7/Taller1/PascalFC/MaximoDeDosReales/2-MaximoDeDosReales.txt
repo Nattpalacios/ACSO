@@ -1,0 +1,15 @@
+program MaximoDeDosReales;
+var
+	a:real;
+	b:real;
+	c:real;
+begin
+	readln(a);
+	readln(b);
+	if a>=b then
+	begin
+		c:=a;
+	end
+	else c:=b;
+	writeln(c);
+end.

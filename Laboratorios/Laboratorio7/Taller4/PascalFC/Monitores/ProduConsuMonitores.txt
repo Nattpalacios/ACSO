@@ -1,0 +1,79 @@
+program ProduConsuMonitores;
+const 
+	numMax = 1000;
+monitor buffer;
+	export produce,consume;
+	type vector=array[0..numMax] of char;
+	var 
+		empty,full:condition; 
+		indp,indc:integer;
+		let:char;
+		buffer:vector;
+procedure mayusCast(a:char;ind:integer);
+	begin
+		if(ord(a)>=97) and (ord(a)<=122) then
+			buffer[ind]:=chr(ord(a)-32)
+		else
+			buffer[ind]:=a;
+	end;
+procedure produce(c:integer);
+	begin
+		if (c>numMax) then
+			begin
+				delay(full);
+			end;
+		readln(let);
+		mayusCast(let,indp);
+		{buffer[indp]:=let;}
+		c:= c+1;
+		indp:=(indp+1) mod numMax;
+		resume(empty);
+	end;
+procedure consume(c:integer);
+	begin
+		if(c=0) then
+		begin
+			delay(empty);
+		end;
+		c:=c-1;
+		writeln(buffer[indc]);
+		indc:=(indc+1) mod numMax;
+		resume(full);
+	end;
+begin
+	indc:=0;
+	indp:=0;
+end;
+
+process type producer;
+	var 
+		i:integer;
+	begin 
+		for i:=1 to numMax do
+			buffer.produce(0);		
+	end;
+process type consumer;
+	var 
+		i:integer;
+	begin
+		for i:=1 to numMax do
+			buffer.consume(0);
+	end;
+var 
+	vecPro:producer;
+	vecCon:consumer;
+begin
+	cobegin
+		vecPro;
+		vecCon;		
+	coend;
+end.
+
+
+
+
+
+
+
+
+

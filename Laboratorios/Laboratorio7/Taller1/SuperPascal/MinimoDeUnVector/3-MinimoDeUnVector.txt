@@ -1,0 +1,22 @@
+program MinimoDeUnVector;
+const
+ nmax = 90001;
+type
+	vector = array [1..nmax] of real;
+var
+	min: real;
+	arreglo: vector;
+	n: integer;
+	i: integer;
+begin
+	readln(n);
+	for i:=1 to n do
+		readln(arreglo[i]);	
+	min:=arreglo[1];
+	for i:=1 to n do
+		if arreglo[i]<min then
+			begin
+				min:=arreglo[i];
+			end;
+	writeln(min);
+end.

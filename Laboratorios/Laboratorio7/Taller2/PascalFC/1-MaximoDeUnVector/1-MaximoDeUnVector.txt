@@ -1,0 +1,41 @@
+program MaximoDeUnVector;
+const
+ nmax = 5001;
+type
+	vector = array [1..nmax] of integer;	
+var
+	n,m,i,j,max: integer;
+	arreglo,r: vector;
+process type maximoNumero(var a: vector;var rta:vector;inicio: integer;fin: integer; index: integer);
+	var
+		i: integer;
+		maximo: integer;
+	begin		
+		maximo := a[inicio];
+		for i:= inicio to fin do
+			begin
+				if a[i] > maximo then
+					maximo := a[i]
+			end;
+	rta[index]:=maximo;
+	end;
+var aProcesos : array[1..5001] of maximoNumero;
+begin
+	readln(n);
+	for i:=1 to n do
+		readln(arreglo[i]);	
+	m := (n+1) div 2;
+	cobegin
+		for i:=1 to m do
+			begin
+				aProcesos[i] (arreglo,r,((i-1)*(n div m))+1,i*(n div m),i)
+			end;
+	coend;
+	max:=r[1];
+	for i:= 1 to m do
+		begin
+			if r[i] > max then
+				max := r[i]
+		end;
+	writeln(max);
+end.

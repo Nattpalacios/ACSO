@@ -1,0 +1,78 @@
+program polyPhaseMergeSort;
+const
+	N = 2000;
+type
+	vector = array[0..N] of integer;
+var
+	arreglo:vector;
+	mostrar:integer;
+	leer:integer;
+
+procedure merge(var arreglo:vector;l:integer;m:integer;r:integer);
+type
+	vectorS = array[0..N] of integer;
+var	
+	left, right:vectorS;
+	i,j,k,n1,n2:integer;
+begin	
+	n1 := m-l;
+	n2 := r-m;
+
+	for i := 1 to n1 do
+		left[i] := arreglo[l + i];
+	for j := 1 to (n2-1) do
+		right[j] := arreglo[(m + 1) + j];
+	i := 0;	j := 0;	k := l;
+	while ((i <= n1) and (j < n2)) do
+		begin
+			if left[i] <= right[j] then
+				begin
+					arreglo[k] := left[i];
+					i := i + 1;
+				end
+			else if left[i] > right[j] then
+				begin
+					arreglo[k] := right[j];
+					j := j + 1;
+				end;
+			k := k + 1;
+		end;
+
+	while (i <= n1) do
+		begin
+			arreglo[k] := left[i];
+			i := i + 1;
+			k := k + 1;
+		end;
+	while (j < n2) do
+		begin
+			arreglo[k] := right[j];
+			j := j + 1;
+			k := k + 1;
+		end;
+end;
+
+procedure polyPhaseMergeSort(var arreglo:vector;l:integer;r:integer);
+var
+	m:integer;
+begin
+	if (l < r) then
+		begin
+			m := (l+(r-1)) div 2;
+			[sic] parallel
+				polyPhaseMergeSort(arreglo,l,m)|
+				polyPhaseMergeSort(arreglo,m+1,r);
+			end;
+			merge(arreglo,l,m,r);
+		end;
+end;
+
+begin
+	for i := 1 to N do
+		readln(arreglo[i]);
+
+	polyPhaseMergeSort(arreglo,1,N);
+
+	for i := 1 to N do
+		writeln(arreglo[i]);
+end.

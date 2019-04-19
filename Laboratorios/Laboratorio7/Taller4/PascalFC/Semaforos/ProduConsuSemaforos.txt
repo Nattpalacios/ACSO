@@ -1,0 +1,57 @@
+program ProduConsuSemaforos;
+const 
+	numMax = 1000;
+type
+	vector=array[1..numMax] of char;
+var 
+	arreglo:vector;
+	pos,n,index: integer;
+	semaforo,full,empty : semaphore;
+
+procedure mayusCast(var a:vector;var ind:integer);
+	begin
+		if (ord(a[ind])>=97) and (ord(a[ind])<=122) then
+			writeln(chr(ord(a[ind])-32))
+		else 
+			write(a[ind]);
+	end;
+
+process producer(var a:vector;var p:integer;N:integer);
+	var
+		i:integer;
+	begin
+		for i:=1 to N do 
+			begin 
+				wait(empty);
+				wait(semaforo);				
+				readln(a[p]);		
+				p := (p+1) mod numMax;
+				signal(semaforo);
+				signal(full);
+			end;
+	end;
+
+process consumer(var a:vector;var ind:integer);
+	begin		
+		repeat
+			wait(full);
+			wait(semaforo);			
+			ind := (ind + 1) mod numMax;
+			mayusCast(a,ind);		
+			signal(semaforo);
+			signal(empty);
+		forever;
+	end;
+
+begin	
+	readln(n);
+	index:=0;
+	pos:=1;
+	initial(semaforo,1);
+	initial(empty,1);
+	initial(full,0);
+	cobegin
+		producer(arreglo,pos,n);
+		consumer(arreglo,index);		
+	coend;
+end.

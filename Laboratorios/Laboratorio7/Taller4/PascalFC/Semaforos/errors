@@ -1,0 +1,217 @@
+- Pascal-FC for IBM PC compatibles - 
+- GNU Compiler Version P5.2.1.2
+
+G L Davies  &  A Burns, University of York
+G Ospina, Escuela Colombiana de Ingenieria
+
+Compiler listing
+
+    1     0 program ProduConsuSemaforos;
+    2     0 const 
+    3     0    numMax = 1000;
+    4     0 type
+    5     0    vector=array[1..numMax] of char;
+    6     0 var 
+    7     0    arreglo:vector;
+    8     0    pos,n,index: integer;
+    9     0    semaforo,full,empty : semaphore;
+   10     0 
+   11     0 procedure mayusCast(var a:vector;var ind:integer);
+   12     0    begin
+   13     0       if (ord(a[ind])>=97) and (ord(a[ind])<=122) then
+   14    16          writeln(chr(ord(a[ind])-32))
+   15    25       else 
+   16    26          write(a[ind]);
+   17    32    end;
+   18    33 
+   19    33 process producer(var a:vector;var p:integer;N:integer);
+   20    33    var
+   21    33       i:integer;
+   22    33    begin
+   23    33       for i:=1 to N do 
+   24    37          begin 
+   25    37             wait(empty);
+   26    39             wait(semaforo);            
+   27    41             readln(a[p]);     
+   28    46             p := (p+1) mod numMax;
+   29    53             signal(semaforo);
+   30    55             signal(full);
+   31    57          end;
+   32    58    end;
+   33    59 
+   34    59 process consumer(var a:vector;var ind:integer);
+   35    59    begin    
+   36    59       repeat
+   37    59          wait(full);
+   38    61          wait(semaforo);         
+   39    63          ind := (ind + 1) mod numMax;
+   40    70          mayusCast(a,ind);    
+   41    75          signal(semaforo);
+   42    77          signal(empty);
+   43    79       forever;
+   44    80    end;
+   45    81 
+   46    81 begin 
+   47    81    readln(n);
+   48    84    index:=0;
+   49    87    pos:=1;
+   50    90    initial(semaforo,1);
+   51    94    initial(empty,1);
+   52    98    initial(full,0);
+   53   102    cobegin
+   54   103       producer(arreglo,pos,n);
+   55   110       consumer(arreglo,index);      
+   56   116    coend;
+   57   117 end.
+
+
+
+Symbol table
+
+    name       link      objekt       type         ref      nrm  lev  adr  aux
+
+ 45 _main        44     procedure   notyp           2      True    0   81    0
+ 46 any           0     variable    synch           0      True    1    5    0
+ 47 nummax       46     constant    integer         0     False    1 1000    0
+ 48 vector       47     type id     array           1     False    1 1000    0
+ 49 arreglo      48     variable    array           1      True    1    5    0
+ 50 pos          49     variable    integer         0      True    1 1005    0
+ 51 n            50     variable    integer         0      True    1 1006    0
+ 52 index        51     variable    integer         0      True    1 1007    0
+ 53 semaforo     52     variable    semaphore       0      True    1 1008    0
+ 54 full         53     variable    semaphore       0      True    1 1009    0
+ 55 empty        54     variable    semaphore       0      True    1 1010    0
+ 56 mayuscast    55     procedure   notyp           3      True    1    0    0
+ 57 a             0     variable    array           1     False    2    5    0
+ 58 ind          57     variable    integer         0     False    2    6    0
+ 59 producer     56     variable    process         4      True    1 1011    0
+ 60 $            59     type id     process         4      True    1   33    0
+ 61 a             0     variable    array           1     False    2    5    0
+ 62 p            61     variable    integer         0     False    2    6    0
+ 63 n            62     variable    integer         0      True    2    7    0
+ 64 i            63     variable    integer         0      True    2    8    0
+ 65 consumer     60     variable    process         5      True    1 1012    0
+ 66 $            65     type id     process         5      True    1   59    0
+ 67 a             0     variable    array           1     False    2    5    0
+ 68 ind          67     variable    integer         0     False    2    6    0
+
+Generated P-code
+
+    0     ldval.adr    2         5          ;13
+    1     ldind.i      2         6          ;13
+    2     ixary.i      0         1          ;13
+    3     rpadr.c      0         0          ;13
+    4     stfun.i      0         6          ;13
+    5     ldcon.i      0        97          ;13
+    6     relge.i      0         0          ;13
+    7     ldval.adr    2         5          ;13
+    8     ldind.i      2         6          ;13
+    9     ixary.i      0         1          ;13
+   10     rpadr.c      0         0          ;13
+   11     stfun.i      0         6          ;13
+   12     ldcon.i      0       122          ;13
+   13     relle.i      0         0          ;13
+   14     andop.b      0         0          ;13
+   15     jmpiz        0        27          ;13
+   16     ldval.adr    2         5          ;14
+   17     ldind.i      2         6          ;14
+   18     ixary.i      0         1          ;14
+   19     rpadr.c      0         0          ;14
+   20     stfun.i      0         6          ;14
+   21     ldcon.i      0        32          ;14
+   22     subop.i      0         0          ;14
+   23     stfun.c      0         5          ;14
+   24     wrval.c      0         0          ;14
+   25     wrlin        0         0          ;14
+   26     jmpuc        0        32          ;14
+   27     ldval.adr    2         5          ;16
+   28     ldind.i      2         6          ;16
+   29     ixary.i      0         1          ;16
+   30     rpadr.c      0         0          ;16
+   31     wrval.c      0         0          ;16
+   32     rproc        0         0          ;16
+   33     ldadr        2         8          ;22
+   34     ldcon.i      0         1          ;23
+   35     ldval.i      2         7          ;23
+   36     for1u.i      0        58          ;23
+   37     ldadr        1      1010          ;25
+   38     swait        0         0          ;25
+   39     ldadr        1      1008          ;26
+   40     swait        0         0          ;26
+   41     ldval.adr    2         5          ;27
+   42     ldind.i      2         6          ;27
+   43     ixary.i      0         1          ;27
+   44     rdinp.c      0         0          ;27
+   45     rdlin        0         0          ;27
+   46     ldval.adr    2         6          ;27
+   47     ldind.i      2         6          ;28
+   48     ldcon.i      0         1          ;28
+   49     addop.i      0         0          ;28
+   50     ldcon.i      0      1000          ;28
+   51     modop.i      0         0          ;28
+   52     store.i      0         0          ;28
+   53     ldadr        1      1008          ;29
+   54     signl        0         0          ;29
+   55     ldadr        1      1009          ;30
+   56     signl        0         0          ;30
+   57     for2u.i      0        37          ;30
+   58     rproc        1         0          ;31
+   59     ldadr        1      1009          ;37
+   60     swait        0         0          ;37
+   61     ldadr        1      1008          ;38
+   62     swait        0         0          ;38
+   63     ldval.adr    2         6          ;38
+   64     ldind.i      2         6          ;39
+   65     ldcon.i      0         1          ;39
+   66     addop.i      0         0          ;39
+   67     ldcon.i      0      1000          ;39
+   68     modop.i      0         0          ;39
+   69     store.i      0         0          ;39
+   70     mkstk        0        56          ;39
+   71     ldval.adr    2         5          ;40
+   72     ldval.adr    2         6          ;40
+   73     calls        0         6          ;40
+   74     updis        1         2          ;40
+   75     ldadr        1      1008          ;41
+   76     signl        0         0          ;41
+   77     ldadr        1      1010          ;42
+   78     signl        0         0          ;42
+   79     jmpuc        0        59          ;42
+   80     rproc        1         0          ;43
+   81     ldadr        1      1006          ;47
+   82     rdinp.i      0         0          ;47
+   83     rdlin        0         0          ;47
+   84     ldadr        1      1007          ;47
+   85     ldcon.i      0         0          ;48
+   86     store.i      0         0          ;48
+   87     ldadr        1      1005          ;48
+   88     ldcon.i      0         1          ;49
+   89     store.i      0         0          ;49
+   90     ldadr        1      1008          ;50
+   91     ldcon.i      0         1          ;50
+   92     lobnd.i      0         0          ;50
+   93     sinit        0         0          ;50
+   94     ldadr        1      1010          ;51
+   95     ldcon.i      0         1          ;51
+   96     lobnd.i      0         0          ;51
+   97     sinit        0         0          ;51
+   98     ldadr        1      1009          ;52
+   99     ldcon.i      0         0          ;52
+  100     lobnd.i      0         0          ;52
+  101     sinit        0         0          ;52
+  102     cobeg        0         0          ;52
+  103     mkstk        1        60          ;53
+  104     ldadr        1      1011          ;53
+  105     procv        0         0          ;53
+  106     ldadr        1         5          ;54
+  107     ldadr        1      1005          ;54
+  108     ldval.i      1      1006          ;54
+  109     calls        1         7          ;54
+  110     mkstk        1        66          ;54
+  111     ldadr        1      1012          ;54
+  112     procv        0         0          ;54
+  113     ldadr        1         5          ;55
+  114     ldadr        1      1007          ;55
+  115     calls        1         6          ;55
+  116     coend        0         0          ;55
+  117     stopx        0         0          ;56

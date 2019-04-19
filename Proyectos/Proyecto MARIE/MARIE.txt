@@ -1,0 +1,18 @@
+	INPUT 
+	STORE X
+	INPUT
+	STORE Y
+	INPUT
+	STORE Z
+	INPUT
+	STORE N
+	JUMP GCD
+	
+	
+GCD, 
+	
+	
+X, DEC 0
+Y, DEC 0
+Z, DEC 0
+N, DEC 0

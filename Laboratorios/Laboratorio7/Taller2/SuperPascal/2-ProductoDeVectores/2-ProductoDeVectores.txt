@@ -1,0 +1,30 @@
+program ProductoDeVectores;
+const
+	nmax = 45001;
+type
+	vector = array [1..nmax] of integer;
+var
+	n,m,i,mult: integer;
+	arreglo1,arreglo2: vector;
+
+procedure multiplicacion(var a:vector;var rta:integer;num:integer;M:integer);
+	var 
+		i:integer;
+	begin
+		for i:=1 to M do
+				rta:=rta+a[i]*num
+	end;
+
+begin
+	readln(n);
+	for i:=1 to n do
+		readln(arreglo1[i]);
+	readln(m);
+	for i:=1 to m do
+		readln(arreglo2[i]);
+	mult:=0;
+	[sic]forall i:=1 to n do
+		multiplicacion(arreglo2,mult,arreglo1[i],m);
+	writeln(mult);
+end.
+

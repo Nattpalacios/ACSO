@@ -1,0 +1,10 @@
+CHIP ComplementoADos {
+	IN ah[16],al[16];
+	OUT sh[16],sl[16];
+	
+	PARTS:	
+	ComplementoAUno(num=ah,num2=num2inv);
+	ComplementoAUno(num=al,num2=num1inv);
+	Add161(a=num2inv,b=true,out=sh,carry=carry);
+	Add161(a=num1inv,b=carry,out=sl,carry=carry1);
+}
