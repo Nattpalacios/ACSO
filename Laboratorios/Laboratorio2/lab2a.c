@@ -52,7 +52,7 @@ void deBaseDecimal(long long numero, int baseDestino){
 	char casi[100] = {'\0'};
 	int x = 0;
 	if(numero == 0){
-		casi[0] = 0;
+		casi[x] = 0;
 	}
 	while(numero != 0){
 		n = numero % baseDestino;
@@ -60,12 +60,16 @@ void deBaseDecimal(long long numero, int baseDestino){
 		casi[x] = listado[n];
 		x++;
 	}
-	x = 99;
-	while(x >= 0){
-		if(casi[x] != '\0'){
-			printf("%c", casi[x]);
-		}
-	}printf("\n");
+	
+	char final[100] = {'\0'};
+	int len = strlen(casi);
+	x = 0;
+	while(x < len){
+		len --;
+		final[x] = casi[len];
+		x ++;
+	}
+	printf("%s \n", final);
 }
 
 void main(){
@@ -95,7 +99,12 @@ void main(){
 						if (baseDestino == 10){
 							printf("%lld \n", temp);
 						}else {
-							deBaseDecimal(temp,baseDestino);
+							if(temp == 0){
+								printf("%lld \n",temp);
+							}else{
+								deBaseDecimal(temp,baseDestino);
+							}
+							
 						}
 					}
 				}
