@@ -24,12 +24,15 @@ int numValido(char numVal[11], int baseOrigen){
 }
 
 double aBaseDecimal(char numero[11], int baseOrigen){
-    double numeroDecimal = 0;
-    int potencia = strlen(numero) - 1;
-    
+	//printf("%s \n", numero);
+	double numeroDecimal = 0;
+    int potencia = -1; 
+    //printf("%d \n", potencia);
     char temp[11];
     int i = 0; int a = 0;
-    while(i < 8){
+    //printf("%s \n", numero[0]);
+    while(i < 11){ 
+    	//printf("%s \n", numero[i]);
     	a = numero[i];
     	if(a > 57){
     		a -= 7;
@@ -38,35 +41,40 @@ double aBaseDecimal(char numero[11], int baseOrigen){
 		temp[i] = a;
     	i++;
 	}
-    
-    i = 0;
-    while(potencia >= 0){
+    i = 2;
+    int limite = (strlen(numero) - 1) * (-1);
+    while(potencia > limite){
+    	//printf("%s \n", "Hola");
+    	//printf("%c \n", temp[i]);
         numeroDecimal += temp[i] * (pow(baseOrigen,potencia));
+        //printf("%lf \n", pow(baseOrigen,potencia));
         i++; potencia--;
     }
+    //printf("%s \n", "Hola");
+    //printf("%lf \n", numeroDecimal);
     return numeroDecimal;
 }
 
 void deBaseDecimal(double numero, int baseDestino){
-	int n = 0;
+	double n = 0;
 	char casi[100] = {'\0'};
 	int x = 0;
 	if(numero == 0){
 		casi[x] = 0;
 	}
 	while(numero != 0){
-		n = numero % baseDestino;
+		n = fmod(numero,(double)baseDestino);
 		numero = (double) numero/baseDestino;
-		casi[x] = listado[n];
+		casi[x] = listado[(int)n];
 		x++;
 	}
 	
 	char final[100] = {'\0'};
-	int len = strlen(casi);
+	int len = strlen(casi) - 1;
 	x = 0;
-	while(x < len){
-		len --;
+	while(x < strlen(casi)){
 		final[x] = casi[len];
+		len --;
 		x ++;
 	}
 	printf("%s \n", final);
@@ -82,6 +90,7 @@ void main(){
 		scanf("%d", &baseOrigen);
 		scanf("%s", &numeroOriginal);
 		scanf("%d", &baseDestino);
+		//printf("%s \n", numeroOriginal);
 		if(baseOrigen < 2 || baseOrigen > 36){
 			printf("Error base origen \n");
 		}else{
@@ -95,9 +104,10 @@ void main(){
 					if(baseOrigen == baseDestino){
 						printf("%s \n", numeroOriginal);			
 					}else{
+						//printf("%s \n", numeroOriginal);
 						double temp = aBaseDecimal(numeroOriginal,baseOrigen);
 						if (baseDestino == 10){
-							printf("%lld \n", temp);
+							printf("%lf \n", temp);
 						}else {
 							if(temp == 0){
 								printf("%lld \n",temp);
