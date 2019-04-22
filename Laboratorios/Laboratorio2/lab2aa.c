@@ -141,43 +141,56 @@ void main(){
 		scanf("%d", &baseOrigen);
 		scanf("%s", &numeroOriginal);
 		scanf("%d", &baseDestino);
-		char *numeroFinal;
-		char *numero = mapearNumeroInicial(numeroOriginal,baseOrigen);
-		int flag = 0;
-		int n = 0;
-		while(n < 100 && numeroFinal[n] != '*'){
-			if(numero[n] >= baseOrigen){
-				flag = 1;
-			}
-			n++;
-		}
+		
 		if(baseOrigen < 2 || baseOrigen > 36){
-			printf("Error base origen");
-		}else if(flag == 1){
-			printf("Error numero");
-		}else if(baseDestino < 2 || baseDestino > 36){
-			printf("Error base destino");		
-		}else if(baseOrigen == baseDestino){
-			printf("%s", numeroOriginal);			
+			printf("Error base origen \n");
 		}else{
-			if(baseOrigen == 10){
-				numeroFinal = deBaseDecimal(numero,baseDestino);				
-			}else if(baseOrigen != 10 && baseDestino != 10){
-				char *temp;
-				temp = aBaseDecimal(numero,baseOrigen);
-				char l[1];
-				int a = 0; int c = 0;
-				while((temp [c] != '*') && c < 100){
-					a += temp[c];
-					c++;
-				}l[0] = a;
-				numeroFinal = deBaseDecimal(l,baseDestino);
+			char *numeroFinal;
+			char *numero = mapearNumeroInicial(numeroOriginal,baseOrigen);
+			int flag = 0;
+			int n = 0;
+			while(n < 100 && numeroFinal[n] != '*'){
+				if(numero[n] >= baseOrigen){
+					flag = 1;
+					break;
+				}
+				n++;
 			}
-			else{
-				numeroFinal = aBaseDecimal(numero,baseOrigen);
+			if(flag == 1){
+				printf("Error numero \n");
+			}else{
+				if(baseDestino < 2 || baseDestino > 36){
+					printf("Error base destino \n");
+				}else{
+					if(baseOrigen == baseDestino){
+						printf("%s \n", numeroOriginal);			
+					}else{
+						if(baseOrigen == 10){
+							numeroFinal = deBaseDecimal(numero,baseDestino);				
+						}else if(baseOrigen != 10 && baseDestino != 10){
+							char *temp;
+							temp = aBaseDecimal(numero,baseOrigen);
+							char l[1];
+							int a = 0; int c = 0;
+							while((temp [c] != '*') && c < 100){
+								a += temp[c];
+								c++;
+							}l[0] = a;
+							numeroFinal = deBaseDecimal(l,baseDestino);
+						}
+						else{
+							numeroFinal = aBaseDecimal(numero,baseOrigen);
+						}
+						mapeoFinal(numeroFinal,baseDestino);
+					}
+				}
 			}
-			mapeoFinal(numeroFinal,baseDestino);
+			
 		}
+		
+		
+		
+		
 		
 		casos--;
 	}
