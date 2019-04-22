@@ -60,13 +60,13 @@ void deBaseDecimal(long long numero, int baseDestino){
 		casi[x] = listado[n];
 		x++;
 	}
-	
+	//printf("%s \n", casi);
 	char final[100] = {'\0'};
-	int len = strlen(casi);
+	int len = strlen(casi) - 1;
 	x = 0;
-	while(x < len){
-		len --;
+	while(x < strlen(casi)){
 		final[x] = casi[len];
+		len --;
 		x ++;
 	}
 	printf("%s \n", final);
