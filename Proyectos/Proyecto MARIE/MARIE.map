@@ -1,0 +1,36 @@
+ -----------------
+ Symbol | Location
+ -------+---------
+ DIVIX  |   080
+ DIVIY  |   081
+ DIVIZ  |   082
+ DIVX   |   049
+ DIVY   |   052
+ DIVZ   |   05B
+ ELSE   |   015
+ END    |   073
+ FOR    |   01D
+ GCD    |   07C
+ GCDF   |   009
+ MAIN   |   064
+ MODX   |   02D
+ MODY   |   038
+ MODZ   |   043
+ N      |   078
+ RESX   |   027
+ RESY   |   032
+ RESZ   |   03D
+ SMALL  |   079
+ SUMA   |   083
+ SVAR   |   07A
+ TOTAL  |   084
+ TOTALL |   06A
+ UNO    |   07B
+ X      |   075
+ XTEMP  |   07D
+ Y      |   076
+ YTEMP  |   07E
+ Z      |   077
+ ZGCD   |   046
+ ZTEMP  |   07F
+
