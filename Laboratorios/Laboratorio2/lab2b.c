@@ -31,20 +31,15 @@ long long poww(int baseOrigen, int potencia){
 		pot = pot * baseO; 
 		x++;
 	}
-	//printf("%lld \n", pot);
 	return pot;
 }
 
 long double aBaseDecimal(char numero[11], int baseOrigen){
-	//printf("%s \n", numero);
 	long double numeroDecimal = 0;
     int potencia = 1; 
-    //printf("%d \n", potencia);
     char temp[11];
     int i = 0; int a = 0;
-    //printf("%s \n", numero[0]);
     while(i < 11){ 
-    	//printf("%s \n", numero[i]);
     	a = numero[i];
     	if(a > 57){
     		a -= 7;
@@ -57,31 +52,10 @@ long double aBaseDecimal(char numero[11], int baseOrigen){
     
     int limite = (strlen(numero) - 1);
     while(potencia < limite){
-    	//printf("%s \n", "Hola");
-    	//long double caste = (long double) temp[i];
-    	//printf("%lld \n", caste);
-    	//long long potenciaaaa = poww(baseOrigen,potencia);
-    	//printf("%lld \n", potenciaaaa);
-    	//printf("%lld \n", poww(10,15));
-    	//printf("%lf \n", 1.000000000000000 / 1.000000000000000);
     	long double tempi = ((long double)temp[i] /(long double)poww(baseOrigen,potencia));
-    	//printf("%lf \n",tempi);
-    	long long tempi2 = (long long) (tempi * 1000000000000000)%1000000000000000;
-    	printf("%lld \n",tempi2);
-    	tempi = (long double)tempi2 / 1000000000000000;
-    	//printf("%lf \n",tempi);
         numeroDecimal += tempi;
-        
-        //printf("%lf \n",(double)temp[i] /(double)poww(baseOrigen,potencia));
-        //long long potenciaaaa = poww(baseOrigen,potencia);
-        //printf("%lf \n",numeroDecimal);
-        //printf("%lf \n", pow(baseOrigen,potencia));
         i++; potencia++;
     }
-    //printf("%s \n", "Hola");
-    //printf("%lf \n", numeroDecimal);
-    //numeroDecimal = numeroDecimal * poww(10,15);
-    //numeroDecimal = numeroDecimal / poww(10,15);
     return numeroDecimal;
 }
 
@@ -114,6 +88,8 @@ void main(){
 	int casos;
 	scanf("%d", &casos);
 	while(casos > 0){
+		char numero[18];
+		char numero2[18] = {'\0'};
 		int baseOrigen;
 		int baseDestino;
 		char numeroOriginal[11];
@@ -137,7 +113,19 @@ void main(){
 						//printf("%s \n", numeroOriginal);
 						double temp = aBaseDecimal(numeroOriginal,baseOrigen);
 						if (baseDestino == 10){
-							printf("%lf \n", temp);
+							sprintf(numero, "%.15lf", temp);
+							int x = strlen(numero)-1;
+							while(x >= 0 && numero[x] != 0){
+								if(numero[x] != '0' && x != 0){
+									numero2[x] = numero[x];
+								}else{
+									if(x == 0){
+										numero2[x] = numero[x];
+									}
+								}
+								x--;
+							}
+							printf("%s \n", numero2);
 						}else {
 							if(temp == 0){
 								printf("%lld \n",temp);
