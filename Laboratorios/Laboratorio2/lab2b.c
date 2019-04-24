@@ -23,10 +23,22 @@ int numValido(char numVal[11], int baseOrigen){
 	return flag;
 }
 
-double aBaseDecimal(char numero[11], int baseOrigen){
+long long poww(int baseOrigen, int potencia){
+	long long pot = 1;
+	long long baseO = (long long) baseOrigen;
+	int x = 0;
+	while(x < potencia){
+		pot = pot * baseO; 
+		x++;
+	}
+	//printf("%lld \n", pot);
+	return pot;
+}
+
+long double aBaseDecimal(char numero[11], int baseOrigen){
 	//printf("%s \n", numero);
-	double numeroDecimal = 0;
-    int potencia = -1; 
+	long double numeroDecimal = 0;
+    int potencia = 1; 
     //printf("%d \n", potencia);
     char temp[11];
     int i = 0; int a = 0;
@@ -42,16 +54,34 @@ double aBaseDecimal(char numero[11], int baseOrigen){
     	i++;
 	}
     i = 2;
-    int limite = (strlen(numero) - 1) * (-1);
-    while(potencia > limite){
+    
+    int limite = (strlen(numero) - 1);
+    while(potencia < limite){
     	//printf("%s \n", "Hola");
-    	//printf("%c \n", temp[i]);
-        numeroDecimal += temp[i] * (pow(baseOrigen,potencia));
+    	//long double caste = (long double) temp[i];
+    	//printf("%lld \n", caste);
+    	//long long potenciaaaa = poww(baseOrigen,potencia);
+    	//printf("%lld \n", potenciaaaa);
+    	//printf("%lld \n", poww(10,15));
+    	//printf("%lf \n", 1.000000000000000 / 1.000000000000000);
+    	long double tempi = ((long double)temp[i] /(long double)poww(baseOrigen,potencia));
+    	//printf("%lf \n",tempi);
+    	long long tempi2 = (long long) (tempi * 1000000000000000)%1000000000000000;
+    	printf("%lld \n",tempi2);
+    	tempi = (long double)tempi2 / 1000000000000000;
+    	//printf("%lf \n",tempi);
+        numeroDecimal += tempi;
+        
+        //printf("%lf \n",(double)temp[i] /(double)poww(baseOrigen,potencia));
+        //long long potenciaaaa = poww(baseOrigen,potencia);
+        //printf("%lf \n",numeroDecimal);
         //printf("%lf \n", pow(baseOrigen,potencia));
-        i++; potencia--;
+        i++; potencia++;
     }
     //printf("%s \n", "Hola");
     //printf("%lf \n", numeroDecimal);
+    //numeroDecimal = numeroDecimal * poww(10,15);
+    //numeroDecimal = numeroDecimal / poww(10,15);
     return numeroDecimal;
 }
 
