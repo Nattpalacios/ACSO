@@ -60,28 +60,34 @@ long double aBaseDecimal(char numero[11], int baseOrigen){
 }
 
 void deBaseDecimal(double numero, int baseDestino){
-	double n = 0;
-	char casi[100] = {'\0'};
+	double n = 0; int pe;
+	char casi[100] = {'0','.'};
 	int x = 0;
 	if(numero == 0){
 		casi[x] = 0;
 	}
-	while(numero != 0){
-		n = fmod(numero,(double)baseDestino);
-		numero = (double) numero/baseDestino;
-		casi[x] = listado[(int)n];
+	x = 2;
+	while(numero != 0 && x < 17){
+		numero = (double) numero*baseDestino;
+		pe = (int) numero;
+		casi[x] = listado[pe];
+		numero = numero - pe;
 		x++;
 	}
+	//printf("%s \n", casi);
+
+	char number2[18] = {'\0'};
 	
-	char final[100] = {'\0'};
-	int len = strlen(casi) - 1;
-	x = 0;
-	while(x < strlen(casi)){
-		final[x] = casi[len];
-		len --;
-		x ++;
+	x = strlen(casi)-1;
+	while(x >= 0 && casi[x] == 0){
+		x--;
 	}
-	printf("%s \n", final);
+	
+	while(x >= 0){
+		number2[x] = casi[x];
+		x--;
+	}
+	printf("%s \n", number2);
 }
 
 void main(){
@@ -113,19 +119,20 @@ void main(){
 						//printf("%s \n", numeroOriginal);
 						double temp = aBaseDecimal(numeroOriginal,baseOrigen);
 						if (baseDestino == 10){
-							sprintf(numero, "%.15lf", temp);
-							int x = strlen(numero)-1;
-							while(x >= 0 && numero[x] != 0){
-								if(numero[x] != '0' && x != 0){
-									numero2[x] = numero[x];
-								}else{
-									if(x == 0){
-										numero2[x] = numero[x];
-									}
+							if(temp == 0){
+								printf("%lf \n",temp);
+							}else{
+								sprintf(numero, "%.15lf", temp);
+								int x = strlen(numero)-1;
+								while(x >= 0 && numero[x] == '0'){
+									x--;
 								}
-								x--;
+								while(x >= 0){
+									numero2[x] = numero[x];
+									x--;
+								}
+								printf("%s \n", numero2);
 							}
-							printf("%s \n", numero2);
 						}else {
 							if(temp == 0){
 								printf("%lld \n",temp);
