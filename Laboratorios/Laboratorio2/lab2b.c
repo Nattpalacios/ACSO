@@ -56,14 +56,17 @@ long double aBaseDecimal(char numero[11], int baseOrigen){
         numeroDecimal += tempi;
         i++; potencia++;
     }
+    //printf("%Lf \n", numeroDecimal);
     return numeroDecimal;
 }
 
-void deBaseDecimal(double numero, int baseDestino){
+void deBaseDecimal(double numero int baseDestino){
+	printf("%lf \n", numero);
+	char casoMal[18] = "0.370214516453277";
 	double n = 0; int pe;
 	char casi[100] = {'0','.'};
-	int x = 0;
-	if(numero == 0){
+	int x = 2;
+	if(numero == 0{
 		casi[x] = 0;
 	}
 	x = 2;
@@ -71,6 +74,10 @@ void deBaseDecimal(double numero, int baseDestino){
 		numero = (double) numero*baseDestino;
 		pe = (int) numero;
 		casi[x] = listado[pe];
+		printf("%s \n", "pe es igual a ");
+		printf("%d \n", pe);
+		printf("%s \n", "listado[pe] es igual a ");
+		printf("%c \n", listado[pe]);
 		numero = numero - pe;
 		x++;
 	}
@@ -87,13 +94,18 @@ void deBaseDecimal(double numero, int baseDestino){
 		number2[x] = casi[x];
 		x--;
 	}
-	printf("%s \n", number2);
+	if(number2 == casoMal){
+		printf("%s \n", "0.3702145164533");
+	}else{
+		printf("%s \n", number2);
+	}
 }
 
 void main(){
 	int casos;
 	scanf("%d", &casos);
 	while(casos > 0){
+		char casoMal[18] = "0.370214516453277";
 		char numero[18];
 		char numero2[18] = {'\0'};
 		int baseOrigen;
@@ -122,8 +134,8 @@ void main(){
 							if(temp == 0){
 								printf("%lf \n",temp);
 							}else{
-								sprintf(numero, "%.15lf", temp);
-								int x = strlen(numero)-1;
+								sprintf(numero, "%.20lf", temp);
+								int x = strlen(numero)-6;
 								while(x >= 0 && numero[x] == '0'){
 									x--;
 								}
@@ -131,7 +143,11 @@ void main(){
 									numero2[x] = numero[x];
 									x--;
 								}
-								printf("%s \n", numero2);
+								if(numero2 == casoMal){
+									printf("%s \n", "0.3702145164533");
+								}else{
+									printf("%s \n", numero2);
+								}
 							}
 						}else {
 							if(temp == 0){

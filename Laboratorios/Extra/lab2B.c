@@ -26,12 +26,12 @@ long long power(int base,int exp){
 
 void fromdec(long long entero,long double rac, int base2){
     char Rentero[300],Rrac[16],caso[16]="370214516453277";
-        int ind=0;
-        if (entero==0)printf("0");
-        while (entero!=0){
-            Rentero[ind]=abc[entero%base2];
-            entero=entero/base2;
-            ind=ind+1;
+    int ind=0;
+    if (entero==0)printf("0");
+    while (entero!=0){
+        Rentero[ind]=abc[entero%base2];
+        entero=entero/base2;
+        ind=ind+1;
     }
     int j;
     for(j=ind-1;j>=0;j--)printf("%c",Rentero[j]);
@@ -87,6 +87,7 @@ void convert(char numero[],int base1,int base2){
         }
         rac=rac/power(base1,tot-(posPoint+1));
     }
+    //printf("%s \n", pars);
     fromdec(entero,rac,base2);
 }
 
