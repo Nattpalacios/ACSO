@@ -1,0 +1,119 @@
+main, dec 0
+    load mcd
+    clear
+	store rta
+    load x
+    store a
+    load y
+    store b
+    JnS gcd
+    store a
+    load z
+    store b
+    Jns gcd
+    store mcd
+	load x
+	store dx
+	load mcd
+	store dy
+	JnS div
+	add rta
+	store rta
+	load y
+	store dx
+	load mcd
+	store dy
+	JnS div
+	add rta
+	store rta
+	load z
+	store dx
+	load mcd
+	store dy
+	JnS div
+	add rta
+	store rta
+	load people
+mien, skipcond 800
+	jump endmien
+	store people
+	load solu
+	add rta
+	store solu
+	load people
+	subt uno
+	jump mien
+endmien, load solu
+	output
+    halt
+x, dec 5
+y, dec 10
+z, dec 3
+people, dec 3
+mcd, dec 0
+rta, dec 0
+solu, dec 0
+uno, dec 1
+
+div, dec 0
+	load divi
+	clear
+	store divi
+	load dx
+fore, skipcond 800
+	jump endfore
+	subt dy
+	store dx
+	load divi
+	add uno
+	store divi
+	load dx
+	jump fore
+endfore, load divi
+enddiv, jumpI div
+dx, dec 0
+dy, dec 0
+divi, dec 0
+
+gcd, dec 0
+    load temp
+    clear
+    store temp
+    load b
+while, skipcond 800
+    jump endwhile
+    load a
+    store temp
+    load b
+    store a
+    load temp
+    store n
+    load b
+    store m
+    JnS mod
+    store b
+    jump while
+endwhile, load a
+endgcd, jumpI gcd
+a, dec 0
+b, dec 0
+temp, dec 0
+
+mod, dec 0
+load n
+subt m
+skipcond 000
+load n
+jump for
+jump endfor
+for, skipcond 800
+jump endfor
+store n
+subt m
+skipcond 000
+store n
+jump for
+endfor, load n
+endmod, jumpI mod
+n, dec 0
+m, dec 0
