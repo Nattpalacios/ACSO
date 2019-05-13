@@ -1,6 +1,6 @@
 @ R12 area
 @ R11 angulo del triangulo
-@ R13
+@ R10
 @ 0. No es un triangulo
 @ 1. Escaleno y acutángulo
 @ 2. Escaleno y rectangulo
@@ -41,7 +41,7 @@ ValorAbsoluto:		MOV R3, #0
 		SUB R4, R3, R1
 		MOV R1, R4
 		B Clasificar
-NoTriangulo:		MOV R13, #0
+NoTriangulo:		MOV R10, #0
 		MOV R11, #0
 		MOV R12, #0
 		SVC 0
@@ -75,45 +75,48 @@ Clasificar:		MOV R12, R1, LSR #1
 		MUL R6, R5, R5
 		SUB R5, R3, R4
 		MUL R7, R5, R5
-		ADD R10, R6, R7
+		ADD R2, R6, R7
 		@ Comparacion lados
 		CMP R8, R9 @ Comparacion A2 == B2
 		BEQ EsEquilatero
 		BNE	NoEquilatero
-EsEquilatero:		CMP R9, R10 @ Comparacion B2 == C2
+EsEquilatero:		CMP R9, R2 @ Comparacion B2 == C2
 		BNE EsIsosceles
-		MOV R13, #7
+		BEQ EsEquilatero2
+EsEquilatero2:		MOV R10, #7
 		MOV R11, #7
 		SVC 0
-EsIsosceles:		MOV R13, #4
+EsIsosceles:		MOV R10, #4
 		B AnguloIf
-NoEquilatero:		CMP R8, R10 @ Comparacion A2 == C2
+NoEquilatero:		CMP R8, R2 @ Comparacion A2 == C2
 		BEQ EsIsosceles
 		BNE EsEscaleno
-EsEscaleno:		CMP R9, R10 @Comparacion B2 == C2
+EsEscaleno:		CMP R9, R2 @Comparacion B2 == C2
 		BNE EsEscaleno2
 		BEQ EsIsosceles
-EsEscaleno2:	MOV R13, #1
+EsEscaleno2:	MOV R10, #1
 		B AnguloIf
 AnguloIf:		CMP R8, R9 @ Comparacion A2 > B2
 		BGT AnguloIf2
 		BLE AnguloElif
-AnguloIf2:		CMP R8, R10 @ Comparacion A2 > C2
+AnguloIf2:		CMP R8, R2 @ Comparacion A2 > C2
 		BLE AnguloElif
-		MOV R7, R8
+		BGT AnguloIf3
+AnguloIf3:		MOV R7, R8
 		MOV R6, R9
-		MOV R5, R10
+		MOV R5, R2
 		B ClasificarAngulo
-AnguloElif:		CMP R9, R10 @ Comparacion B2 > C2
+AnguloElif:		CMP R9, R2 @ Comparacion B2 > C2
 		BGT AnguloElif2
 		BLE AnguloElse
 AnguloElif2:		CMP R9, R8 @ Comparacion B2 > A2
 		BLE AnguloElse
-		MOV R7, R9
+		BGT AnguloElif3
+AnguloElif3:		MOV R7, R9
 		MOV R6, R8
-		MOV R5, R10
+		MOV R5, R2
 		B ClasificarAngulo
-AnguloElse:		MOV R7, R10
+AnguloElse:		MOV R7, R2
 		MOV R6, R8
 		MOV R5, R9
 		B ClasificarAngulo		
@@ -122,28 +125,32 @@ ClasificarAngulo:		ADD R3, R6, R5
 		BEQ EsRectangulo
 		BGT EsObtusangulo
 		BLT EsAcutangulo
-EsRectangulo:		CMP R13, #1
+EsRectangulo:		CMP R10, #1
 		BNE RectanguloIsosceles
-		MOV R11, #2
-		MOV R13, #2
+		BEQ RectanguloEscaleno
+RectanguloEscaleno:		MOV R11, #2
+		MOV R10, #2
 		SVC 0
 RectanguloIsosceles:		MOV R11, #5
-		MOV R13, #5
+		MOV R10, #5
 		SVC 0
-EsObtusangulo:		CMP R13, #1
+EsObtusangulo:		CMP R10, #1
 		BNE ObtusanguloIsosceles
-		MOV R11, #3
-		MOV R13, #3
+		BEQ ObtusanguloEscaleno
+ObtusanguloEscaleno:		MOV R11, #3
+		MOV R10, #3
 		SVC 0
 ObtusanguloIsosceles:		MOV R11, #6
-		MOV R13, #6
+		MOV R10, #6
 		SVC 0
-EsAcutangulo:		CMP R13, #1
+EsAcutangulo:		CMP R10, #1
 		BNE AcutanguloIsosceles
-		MOV R11, #1
+		BEQ AcutanguloEscaleno
+AcutanguloEscaleno:		MOV R11, #1
 		SVC 0
 AcutanguloIsosceles:		MOV R11, #4
 		SVC 0
+		
 .d:
 		X1: .word 7
 		Y1: .word 0
