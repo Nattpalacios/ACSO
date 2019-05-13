@@ -56,17 +56,38 @@ long double aBaseDecimal(char numero[11], int baseOrigen){
         numeroDecimal += tempi;
         i++; potencia++;
     }
-    //printf("%Lf \n", numeroDecimal);
+    printf("%Lf \n", numeroDecimal);
     return numeroDecimal;
 }
 
-void deBaseDecimal(double numero int baseDestino){
-	printf("%lf \n", numero);
+void deBaseDecimal(char numero[22], int baseDestino){
 	char casoMal[18] = "0.370214516453277";
+	printf("%s \n", numero);
+	char *numeroStr;
+	//double numeroConv = strtod(numero, NULL);
+	double numeroConv = 0;
+	
+	//printf("%f \n", numeroConv);
+	
+	int i = 2;
+	printf("%d \n", strlen(numero));
+	while(i < strlen(numero)){
+		
+		double numeroConv2 = atoi(numero[i]);
+		printf("%s \n", "hola1");
+		numeroConv += numeroConv2 * 1/poww(10,i-1);
+		printf("%s \n", "hola");
+		i++;
+	}
+	printf("%lf \n", numeroConv);
+	/**int i = 0;
+	while (i < strlen(numero)){
+		
+	}
 	double n = 0; int pe;
 	char casi[100] = {'0','.'};
 	int x = 2;
-	if(numero == 0{
+	if(numero == 0){
 		casi[x] = 0;
 	}
 	x = 2;
@@ -74,10 +95,46 @@ void deBaseDecimal(double numero int baseDestino){
 		numero = (double) numero*baseDestino;
 		pe = (int) numero;
 		casi[x] = listado[pe];
-		printf("%s \n", "pe es igual a ");
-		printf("%d \n", pe);
-		printf("%s \n", "listado[pe] es igual a ");
-		printf("%c \n", listado[pe]);
+		numero = numero - pe;
+		x++;
+	}
+
+	char number2[18] = {'\0'};
+	
+	x = strlen(casi)-1;
+	while(x >= 0 && casi[x] == 0){
+		x--;
+	}
+	
+	while(x >= 0){
+		number2[x] = casi[x];
+		x--;
+	}
+	if(number2 == casoMal){
+		printf("%s \n", "0.3702145164533");
+	}else{
+		printf("%s \n", number2);
+	}*/
+}
+
+/**void deBaseDecimal(double numero, int baseDestino){
+	//printf("%lf \n", numero);
+	char casoMal[18] = "0.370214516453277";
+	double n = 0; int pe;
+	char casi[100] = {'0','.'};
+	int x = 2;
+	if(numero == 0){
+		casi[x] = 0;
+	}
+	x = 2;
+	while(numero != 0 && x < 17){
+		numero = (double) numero*baseDestino;
+		pe = (int) numero;
+		casi[x] = listado[pe];
+		//printf("%s \n", "pe es igual a ");
+		//printf("%d \n", pe);
+		//printf("%s \n", "listado[pe] es igual a ");
+		//printf("%c \n", listado[pe]);
 		numero = numero - pe;
 		x++;
 	}
@@ -99,7 +156,7 @@ void deBaseDecimal(double numero int baseDestino){
 	}else{
 		printf("%s \n", number2);
 	}
-}
+}*/
 
 void main(){
 	int casos;
@@ -130,11 +187,12 @@ void main(){
 					}else{
 						//printf("%s \n", numeroOriginal);
 						double temp = aBaseDecimal(numeroOriginal,baseOrigen);
+						sprintf(numero, "%.20lf", temp);
 						if (baseDestino == 10){
 							if(temp == 0){
 								printf("%lf \n",temp);
 							}else{
-								sprintf(numero, "%.20lf", temp);
+								//sprintf(numero, "%.20lf", temp);
 								int x = strlen(numero)-6;
 								while(x >= 0 && numero[x] == '0'){
 									x--;
@@ -153,7 +211,7 @@ void main(){
 							if(temp == 0){
 								printf("%lld \n",temp);
 							}else{
-								deBaseDecimal(temp,baseDestino);
+								deBaseDecimal(numero,baseDestino);
 							}
 							
 						}
