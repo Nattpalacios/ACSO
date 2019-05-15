@@ -10,7 +10,7 @@ process type maximoNumero(var a: vector;var rta:vector;inicio: integer;fin: inte
 	var
 		i: integer;
 		maximo: integer;
-	begin		
+	begin
 		maximo := a[inicio];
 		for i:= inicio to fin do
 			begin

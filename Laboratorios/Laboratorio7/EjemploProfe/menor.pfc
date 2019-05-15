@@ -1,0 +1,35 @@
+program quiz;
+
+const
+  N = 90000;
+  M = 5;
+
+type
+  Tvector = array [1..N] of integer;
+
+process type Tf(var v: Tvector; inf, sup: integer);
+var
+  suma, i, cantidad: integer;
+  prom: real;
+begin
+  writeln('Inicia  proceso F(v, ', inf, ', ', sup, ')');
+  suma := 0;
+  for i:= inf to sup do
+    suma := suma + v[i];
+  cantidad := sup - inf;
+  prom := suma / cantidad;
+  writeln('El promedio [', inf, ',', sup , '] es: ', prom);
+  writeln('termina proceso F(v, ', inf, ', ', sup, ')')
+end;
+
+var
+  i: integer;
+  v: Tvector;
+  f: array [1..M] of TF;
+
+begin
+  cobegin
+    for i := 1 to M do
+      f[i](v, ((i - 1) * (N div M)) + 1, i * (N div M))
+  coend
+end.

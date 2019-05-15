@@ -1,0 +1,34 @@
+ ----------------------
+ Symbol      | Location
+ ------------+---------
+ ad          |   033
+ ag          |   037
+ am          |   030
+ ansMulti    |   032
+ bd          |   034
+ bg          |   038
+ bm          |   031
+ cero        |   02B
+ co          |   035
+ div         |   04B
+ finishDiv   |   05B
+ finishGcd   |   06E
+ finishMulti |   04A
+ gcd         |   05E
+ gcdab       |   03A
+ iniDiv      |   054
+ iniGcd      |   063
+ iniMulti    |   043
+ md          |   036
+ multi       |   03C
+ n           |   02F
+ suma        |   03B
+ tempg       |   039
+ uno         |   02A
+ whileDiv    |   04F
+ whileGcd    |   05F
+ whileMulti  |   03F
+ x           |   02C
+ y           |   02D
+ z           |   02E
+

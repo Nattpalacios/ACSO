@@ -1,0 +1,119 @@
+Load x
+Store ag
+Load y
+Store bg
+JnS gcd
+Load gcdab
+Store ag
+Load z
+Store bg
+JnS gcd
+Load gcdab
+Store bd
+Load x
+Store ad
+JnS div
+Load suma
+Add co
+Store suma
+Load gcdab
+Store bd
+Load y
+Store ad
+JnS div
+Load suma
+Add co
+Store suma
+Load gcdab
+Store bd
+Load z
+Store ad
+JnS div
+Load suma
+Add co
+Store suma
+Load suma
+Store am
+Load n
+Store bm
+JnS multi
+Load ansMulti
+Output
+Halt
+uno, Dec 1
+cero, Dec 0
+x, Dec 22
+y, Dec 11
+z, Dec 33
+n, Dec 10
+am, Dec 0
+bm, Dec 0
+ansMulti, Dec 0
+ad, Dec 0
+bd, Dec 0
+co, Dec 0
+md, Dec 0
+ag, Dec 0
+bg, Dec 0
+tempg, Dec 0
+gcdab, Dec 0
+suma, Dec 0
+
+
+multi, Dec 0
+	Load cero
+	Store ansMulti
+whileMulti, Load bm
+	Skipcond 800
+	Jump finishMulti
+	Jump iniMulti
+iniMulti, Load bm
+	Subt uno
+	Store bm
+	Load ansMulti
+	Add am
+	Store ansMulti
+	Jump whileMulti
+finishMulti, JumpI multi
+
+
+	
+div, Dec 0
+	Load cero
+	Store co
+	Store md
+whileDiv, Load ad
+	Subt bd
+	Skipcond 0
+	Jump iniDiv
+	Jump finishDiv
+iniDiv, Load ad
+	Subt bd
+	Store ad
+	Load co
+	Add uno
+	Store co
+	Jump whileDiv
+finishDiv, Load ad
+	Store md
+	JumpI div
+
+gcd, Dec 0
+whileGcd, Load bg
+	Skipcond 400
+	Jump iniGcd
+	Jump finishGcd
+iniGcd, Load bg
+	Store tempg
+	Store bd
+	Load ag
+	Store ad
+	JnS div
+	Load md
+	Store bg
+	Load tempg
+	Store ag
+	Jump whileGcd
+finishGcd, Load ag
+	Store gcdab
+	JumpI gcd
