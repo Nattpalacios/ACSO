@@ -1,8 +1,8 @@
 program MaximoDeUnVector;
 const
- nmax = 90001;
+ nmax = 27000;
 type
-	vector = array [1..nmax] of integer;	
+	vector = array [1..nmax] of integer;
 var
 	n,m,i,j,max: integer;
 	arreglo,r: vector;
@@ -23,15 +23,15 @@ var aProcesos : array[1..45001] of maximoNumero;
 begin
 	readln(n);
 	for i:=1 to n do
-		readln(arreglo[i]);	
-	m := (n+1) div 2;
+		readln(arreglo[i]);
+	m := (n) div 2;
 	cobegin
 		for i:=1 to m do
 			begin
 				aProcesos[i] (arreglo,r,((i-1)*(n div m))+1,i*(n div m),i)
 			end;
 	coend;
-	max:=r[1];
+	max:=arreglo[n];
 	for i:= 1 to m do
 		begin
 			if r[i] > max then

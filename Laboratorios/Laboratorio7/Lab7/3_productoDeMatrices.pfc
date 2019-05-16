@@ -1,15 +1,15 @@
-program ProductoDeMatrices;
+program ProductoDeMatrices2;
 const
-	maxFilas = 315;
-	maxColumnas = 180;
+	maxFilas=260;
+	maxColumnas=125;
 type
-	vector = array [1..maxColumnas] of integer;
-	matriz = array [1..maxFilas] of vector;
+	vector=array[1..maxColumnas] of integer;
+	matriz=array[1..maxFilas] of vector;
 var
 	f1,c1,f2,c2,i,j,m:integer;
 	mat1,mat2,matRes:matriz;
 
-process type multiplicacion(var rta: matriz;var a: matriz;var b:matriz;filaIni: integer; filaFin: integer);
+process type multiplicacion(var rta: matriz; var a: matriz; var b: matriz; filaIni: integer; filaFin: integer);
 	var
 		i,j,k,cont: integer;
 	begin
@@ -22,7 +22,7 @@ process type multiplicacion(var rta: matriz;var a: matriz;var b:matriz;filaIni: 
 							cont := cont+(a[k,j]*b[j,i])
 						end;
 					rta[k,i]:=cont;
-					cont := 0;
+					cont:=0;
 				end;
 	end;
 
@@ -42,7 +42,7 @@ begin
 	cobegin
 		for i:=1 to m do
 			begin
-				aProcesos[i] (matRes,mat1,mat2,((i-1)*(f1 div m))+1, i*(f1 div m))
+				aProcesos[i] (matRes,mat1,mat2,((i-1)*(f1 div m))+1,i*(f1 div m))
 			end;
 	coend;
 	for i:=1 to f1 do
@@ -52,7 +52,6 @@ begin
 					write(matRes[i,j]);
 					write(' ');
 				end;
-			writeln(' ');
+			write(' ');
 		end;
 end.
-
