@@ -1,141 +1,133 @@
      Assembly listing for: MARIE.mas
-                Assembled: Sat May 11 22:42:25 COT 2019
+                Assembled: Fri May 17 15:53:22 COT 2019
 
 000 5000 |             INPUT                 
-001 206C |             STORE X               
+001 2065 |             STORE X               
 002 5000 |             INPUT                 
-003 206D |             STORE Y               
+003 2066 |             STORE Y               
 004 5000 |             INPUT                 
-005 206E |             STORE Z               
+005 2067 |             STORE Z               
 006 5000 |             INPUT                 
-007 206F |             STORE N               
+007 2068 |             STORE N               
 008 9009 |             JUMP GCDF             
          |                                  	
-009 106C |  GCDF       LOAD X                
-00A 2071 |             STORE XTEMP           
-00B 106D |             LOAD Y                
-00C 8800 |  FORR       SKIPCOND 800          
-00D 901C |             JUMP ENDFOR           
-00E 2070 |             STORE TEMP            
-00F 1071 |  MOD        LOAD XTEMP            
-010 406D |             SUBT Y                
-011 8000 |             SKIPCOND 000          
-012 901A |             JUMP SEGUIRMOD        
-013 9014 |             JUMP ENDMOD           
-014 306D |  ENDMOD     ADD Y                 
-015 2072 |             STORE YTEMP           
-016 1070 |             LOAD TEMP             
-017 2071 |             STORE XTEMP           
-018 1072 |             LOAD YTEMP            
-019 900C |             JUMP FORR             
-01A 2071 |  SEGUIRMOD  STORE XTEMP           
-01B 900F |             JUMP MOD              
-01C 1071 |  ENDFOR     LOAD XTEMP            
-01D 2073 |             STORE GCD             
-01E 1073 |             LOAD GCD              
-01F 6000 |             OUTPUT                
+009 1065 |  GCDF       LOAD X                
+00A 206A |             STORE XTEMP           
+00B 1066 |             LOAD Y                
+00C 206B |             STORE YTEMP           
+00D 106B |             LOAD YTEMP            
+00E 8800 |  FORR       SKIPCOND 800          
+00F 901E |             JUMP ENDFOR           
+010 2069 |             STORE TEMP            
+011 106A |  MOD        LOAD XTEMP            
+012 406B |             SUBT YTEMP            
+013 8000 |             SKIPCOND 000          
+014 901C |             JUMP SEGUIRMOD        
+015 9016 |             JUMP ENDMOD           
+016 306B |  ENDMOD     ADD YTEMP             
+017 206B |             STORE YTEMP           
+018 1069 |             LOAD TEMP             
+019 206A |             STORE XTEMP           
+01A 106B |             LOAD YTEMP            
+01B 900E |             JUMP FORR             
+01C 206A |  SEGUIRMOD  STORE XTEMP           
+01D 9011 |             JUMP MOD              
+01E 106A |  ENDFOR     LOAD XTEMP            
+01F 206C |             STORE GCD             
 020 9021 |             JUMP GCDF2            
          |                                  
-021 1073 |  GCDF2      LOAD GCD              
-022 2074 |             STORE GCDTEMP         
-023 106E |             LOAD Z                
-024 8800 |  FORR2      SKIPCOND 800          
-025 9034 |             JUMP ENDFOR2          
-026 2070 |             STORE TEMP            
-027 1074 |  MOD2       LOAD GCDTEMP          
-028 406E |             SUBT Z                
-029 8000 |             SKIPCOND 000          
-02A 9032 |             JUMP SEGUIRMOD2       
-02B 902C |             JUMP ENDMOD2          
-02C 306E |  ENDMOD2    ADD Z                 
-02D 2075 |             STORE ZTEMP           
-02E 1070 |             LOAD TEMP             
-02F 2074 |             STORE GCDTEMP         
-030 1075 |             LOAD ZTEMP            
-031 9024 |             JUMP FORR2            
-032 2074 |  SEGUIRMOD2 STORE GCDTEMP         
-033 9027 |             JUMP MOD2             
-034 1074 |  ENDFOR2    LOAD GCDTEMP          
-035 2076 |             STORE GCD2            
-036 6000 |             OUTPUT                
-037 9038 |             JUMP DIVX             
+021 106C |  GCDF2      LOAD GCD              
+022 206D |             STORE GCDTEMP         
+023 1067 |             LOAD Z                
+024 206E |             STORE ZTEMP           
+025 106E |             LOAD ZTEMP            
+026 8800 |  FORR2      SKIPCOND 800          
+027 9036 |             JUMP ENDFOR2          
+028 2069 |             STORE TEMP            
+029 106D |  MOD2       LOAD GCDTEMP          
+02A 406E |             SUBT ZTEMP            
+02B 8000 |             SKIPCOND 000          
+02C 9034 |             JUMP SEGUIRMOD2       
+02D 902E |             JUMP ENDMOD2          
+02E 306E |  ENDMOD2    ADD ZTEMP             
+02F 206E |             STORE ZTEMP           
+030 1069 |             LOAD TEMP             
+031 206D |             STORE GCDTEMP         
+032 106E |             LOAD ZTEMP            
+033 9026 |             JUMP FORR2            
+034 206D |  SEGUIRMOD2 STORE GCDTEMP         
+035 9029 |             JUMP MOD2             
+036 106D |  ENDFOR2    LOAD GCDTEMP          
+037 206F |             STORE GCD2            
+038 9039 |             JUMP DIVX             
          |                                  
-038 1077 |  DIVX       LOAD A                
-039 307A |             ADD UNO               
-03A 2077 |             STORE A               
-03B 106C |             LOAD X                
-03C 4076 |             SUBT GCD2             
-03D 206C |             STORE X               
-03E 8400 |             SKIPCOND 400          
-03F 9038 |             JUMP DIVX             
-040 1077 |             LOAD A                
-041 6000 |             OUTPUT                
-042 9043 |             JUMP DIVY             
-         |                                  	
-         |                                  	
-043 1078 |  DIVY       LOAD B                
-044 307A |             ADD UNO               
-045 2078 |             STORE B               
-046 106D |             LOAD Y                
-047 4076 |             SUBT GCD2             
-048 206D |             STORE Y               
-049 8400 |             SKIPCOND 400          
-04A 9043 |             JUMP DIVY             
-04B 1078 |             LOAD B                
-04C 6000 |             OUTPUT                
-04D 904E |             JUMP DIVZ             
-         |                                  	
-04E 1079 |  DIVZ       LOAD C                
-04F 307A |             ADD UNO               
-050 2079 |             STORE C               
-051 106E |             LOAD Z                
-052 4076 |             SUBT GCD2             
-053 206E |             STORE Z               
-054 8400 |             SKIPCOND 400          
-055 904E |             JUMP DIVZ             
-056 1079 |             LOAD C                
-057 6000 |             OUTPUT                
-058 9059 |             JUMP MAIN             
+039 1070 |  DIVX       LOAD A                
+03A 3073 |             ADD UNO               
+03B 2070 |             STORE A               
+03C 1065 |             LOAD X                
+03D 406F |             SUBT GCD2             
+03E 2065 |             STORE X               
+03F 8400 |             SKIPCOND 400          
+040 9039 |             JUMP DIVX             
+041 9042 |             JUMP DIVY             
          |                                  
-059 107B |  MAIN       LOAD SUMA             
-05A 3077 |             ADD A                 
-05B 3078 |             ADD B                 
-05C 3079 |             ADD C                 
-05D 207B |             STORE SUMA            
-05E 107B |             LOAD SUMA             
-05F 6000 |             OUTPUT                
-060 9061 |             JUMP TOTALL           
-         |                                  
-061 107C |  TOTALL     LOAD TOTAL            
-062 307B |             ADD SUMA              
-063 207C |             STORE TOTAL           
-064 106F |             LOAD N                
-065 407A |             SUBT UNO              
-066 206F |             STORE N               
-067 8800 |             SKIPCOND 800          
-068 906A |             JUMP END              
-069 9061 |             JUMP TOTALL           
-         |                                  
-06A 107C |  END        LOAD TOTAL            
-06B 6000 |             OUTPUT                
+042 1071 |  DIVY       LOAD B                
+043 3073 |             ADD UNO               
+044 2071 |             STORE B               
+045 1066 |             LOAD Y                
+046 406F |             SUBT GCD2             
+047 2066 |             STORE Y               
+048 8400 |             SKIPCOND 400          
+049 9042 |             JUMP DIVY             
+04A 904B |             JUMP DIVZ             
          |                                  	
-06C 0000 |  X          DEC 0                 
-06D 0000 |  Y          DEC 0                 
-06E 0000 |  Z          DEC 0                 
-06F 0000 |  N          DEC 0                 
-070 0000 |  TEMP       DEC 0                 
-071 0000 |  XTEMP      DEC 0                 
-072 0000 |  YTEMP      DEC 0                 
-073 0000 |  GCD        DEC 0                 
-074 0000 |  GCDTEMP    DEC 0                 
-075 0000 |  ZTEMP      DEC 0                 
-076 0000 |  GCD2       DEC 0                 
-077 0000 |  A          DEC 0                 
-078 0000 |  B          DEC 0                 
-079 0000 |  C          DEC 0                 
-07A 0001 |  UNO        DEC 1                 
-07B 0000 |  SUMA       DEC 0                 
-07C 0000 |  TOTAL      DEC 0                 
+04B 1072 |  DIVZ       LOAD C                
+04C 3073 |             ADD UNO               
+04D 2072 |             STORE C               
+04E 1067 |             LOAD Z                
+04F 406F |             SUBT GCD2             
+050 2067 |             STORE Z               
+051 8400 |             SKIPCOND 400          
+052 904B |             JUMP DIVZ             
+053 9054 |             JUMP MAIN             
+         |                                  
+054 1074 |  MAIN       LOAD SUMA             
+055 3070 |             ADD A                 
+056 3071 |             ADD B                 
+057 3072 |             ADD C                 
+058 2074 |             STORE SUMA            
+059 905A |             JUMP TOTALL           
+         |                                  
+05A 1075 |  TOTALL     LOAD TOTAL            
+05B 3074 |             ADD SUMA              
+05C 2075 |             STORE TOTAL           
+05D 1068 |             LOAD N                
+05E 4073 |             SUBT UNO              
+05F 2068 |             STORE N               
+060 8800 |             SKIPCOND 800          
+061 9063 |             JUMP END              
+062 905A |             JUMP TOTALL           
+         |                                  
+063 1075 |  END        LOAD TOTAL            
+064 6000 |             OUTPUT                
+         |                                  	
+065 0000 |  X          DEC 0                 
+066 0000 |  Y          DEC 0                 
+067 0000 |  Z          DEC 0                 
+068 0000 |  N          DEC 0                 
+069 0000 |  TEMP       DEC 0                 
+06A 0000 |  XTEMP      DEC 0                 
+06B 0000 |  YTEMP      DEC 0                 
+06C 0000 |  GCD        DEC 0                 
+06D 0000 |  GCDTEMP    DEC 0                 
+06E 0000 |  ZTEMP      DEC 0                 
+06F 0000 |  GCD2       DEC 0                 
+070 0000 |  A          DEC 0                 
+071 0000 |  B          DEC 0                 
+072 0000 |  C          DEC 0                 
+073 0001 |  UNO        DEC 1                 
+074 0000 |  SUMA       DEC 0                 
+075 0000 |  TOTAL      DEC 0                 
 
 Assembly successful.
 
@@ -143,41 +135,41 @@ Assembly successful.
          ------------------------------------------------------
           Symbol     | Defined | References 
          ------------+---------+-------------------------------
-          A          |   077   | 038, 03A, 040, 05A
-          B          |   078   | 043, 045, 04B, 05B
-          C          |   079   | 04E, 050, 056, 05C
-          DIVX       |   038   | 037, 03F
-          DIVY       |   043   | 042, 04A
-          DIVZ       |   04E   | 04D, 055
-          END        |   06A   | 068
-          ENDFOR     |   01C   | 00D
-          ENDFOR2    |   034   | 025
-          ENDMOD     |   014   | 013
-          ENDMOD2    |   02C   | 02B
-          FORR       |   00C   | 019
-          FORR2      |   024   | 031
-          GCD        |   073   | 01D, 01E, 021
-          GCD2       |   076   | 035, 03C, 047, 052
+          A          |   070   | 039, 03B, 055
+          B          |   071   | 042, 044, 056
+          C          |   072   | 04B, 04D, 057
+          DIVX       |   039   | 038, 040
+          DIVY       |   042   | 041, 049
+          DIVZ       |   04B   | 04A, 052
+          END        |   063   | 061
+          ENDFOR     |   01E   | 00F
+          ENDFOR2    |   036   | 027
+          ENDMOD     |   016   | 015
+          ENDMOD2    |   02E   | 02D
+          FORR       |   00E   | 01B
+          FORR2      |   026   | 033
+          GCD        |   06C   | 01F, 021
+          GCD2       |   06F   | 037, 03D, 046, 04F
           GCDF       |   009   | 008
           GCDF2      |   021   | 020
-          GCDTEMP    |   074   | 022, 027, 02F, 032, 034
-          MAIN       |   059   | 058
-          MOD        |   00F   | 01B
-          MOD2       |   027   | 033
-          N          |   06F   | 007, 064, 066
-          SEGUIRMOD  |   01A   | 012
-          SEGUIRMOD2 |   032   | 02A
-          SUMA       |   07B   | 059, 05D, 05E, 062
-          TEMP       |   070   | 00E, 016, 026, 02E
-          TOTAL      |   07C   | 061, 063, 06A
-          TOTALL     |   061   | 060, 069
-          UNO        |   07A   | 039, 044, 04F, 065
-          X          |   06C   | 001, 009, 03B, 03D
-          XTEMP      |   071   | 00A, 00F, 017, 01A, 01C
-          Y          |   06D   | 003, 00B, 010, 014, 046, 048
-          YTEMP      |   072   | 015, 018
-          Z          |   06E   | 005, 023, 028, 02C, 051, 053
-          ZTEMP      |   075   | 02D, 030
+          GCDTEMP    |   06D   | 022, 029, 031, 034, 036
+          MAIN       |   054   | 053
+          MOD        |   011   | 01D
+          MOD2       |   029   | 035
+          N          |   068   | 007, 05D, 05F
+          SEGUIRMOD  |   01C   | 014
+          SEGUIRMOD2 |   034   | 02C
+          SUMA       |   074   | 054, 058, 05B
+          TEMP       |   069   | 010, 018, 028, 030
+          TOTAL      |   075   | 05A, 05C, 063
+          TOTALL     |   05A   | 059, 062
+          UNO        |   073   | 03A, 043, 04C, 05E
+          X          |   065   | 001, 009, 03C, 03E
+          XTEMP      |   06A   | 00A, 011, 019, 01C, 01E
+          Y          |   066   | 003, 00B, 045, 047
+          YTEMP      |   06B   | 00C, 00D, 012, 016, 017, 01A
+          Z          |   067   | 005, 023, 04E, 050
+          ZTEMP      |   06E   | 024, 025, 02A, 02E, 02F, 032
          ------------------------------------------------------
 
 

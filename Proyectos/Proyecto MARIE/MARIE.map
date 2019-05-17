@@ -1,39 +1,39 @@
  ---------------------
  Symbol     | Location
  -----------+---------
- A          |   077
- B          |   078
- C          |   079
- DIVX       |   038
- DIVY       |   043
- DIVZ       |   04E
- END        |   06A
- ENDFOR     |   01C
- ENDFOR2    |   034
- ENDMOD     |   014
- ENDMOD2    |   02C
- FORR       |   00C
- FORR2      |   024
- GCD        |   073
- GCD2       |   076
+ A          |   070
+ B          |   071
+ C          |   072
+ DIVX       |   039
+ DIVY       |   042
+ DIVZ       |   04B
+ END        |   063
+ ENDFOR     |   01E
+ ENDFOR2    |   036
+ ENDMOD     |   016
+ ENDMOD2    |   02E
+ FORR       |   00E
+ FORR2      |   026
+ GCD        |   06C
+ GCD2       |   06F
  GCDF       |   009
  GCDF2      |   021
- GCDTEMP    |   074
- MAIN       |   059
- MOD        |   00F
- MOD2       |   027
- N          |   06F
- SEGUIRMOD  |   01A
- SEGUIRMOD2 |   032
- SUMA       |   07B
- TEMP       |   070
- TOTAL      |   07C
- TOTALL     |   061
- UNO        |   07A
- X          |   06C
- XTEMP      |   071
- Y          |   06D
- YTEMP      |   072
- Z          |   06E
- ZTEMP      |   075
+ GCDTEMP    |   06D
+ MAIN       |   054
+ MOD        |   011
+ MOD2       |   029
+ N          |   068
+ SEGUIRMOD  |   01C
+ SEGUIRMOD2 |   034
+ SUMA       |   074
+ TEMP       |   069
+ TOTAL      |   075
+ TOTALL     |   05A
+ UNO        |   073
+ X          |   065
+ XTEMP      |   06A
+ Y          |   066
+ YTEMP      |   06B
+ Z          |   067
+ ZTEMP      |   06E
 
